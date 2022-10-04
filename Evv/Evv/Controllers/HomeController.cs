@@ -1,4 +1,5 @@
-﻿using Evv.Models;
+﻿using Evv.Classes;
+using Evv.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -18,12 +19,12 @@ namespace Evv.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Privacy(TripViewModel viewModel)
         {
-            Trip trip = new Trip(200, Vehicle_Modifier.Car_petrol,1);
-            ViewBag.Trip = trip;
-            ViewBag.Score = trip.GetScore();
-            return View();
+            Trip trip = new Trip(viewModel.Distance, Vehicle_Modifier.Motor, viewModel.People);
+            viewModel.Distance = trip.GetDistance();
+            viewModel.score = trip.CalculateScore();
+            return View(viewModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

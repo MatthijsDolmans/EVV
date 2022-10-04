@@ -1,10 +1,26 @@
-﻿@{
+﻿@model TripViewModel
+@{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>Distance</h1>
-<p>@ViewBag.trip<p/>
+<form method="post">
+    @Html.ValidationSummary()
+    <p>
+        <label asp-for="Distance">Distance</label>
+        <input asp-for="Distance" type="text" placeholder="Enter distance" />
+        <label asp-for="People">people</label>
+        <input asp-for="People" type="text" placeholder="Enter amount of people" />
+    </p>
+    <p>
+        <input type="submit" value="enter" />
+    </p>
+</form>
+@if(Model.score.ToString() != "NaN")
+{
+    <section>
+       <h1> @Model.score </h1>
+    </section>
 
-<br />
+}
+ 
 
-<h1>Score</h1>
-<p>@ViewBag.Score</p>
+
