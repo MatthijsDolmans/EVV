@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Caspe\\Desktop\\Project\\Evv\\Evv\\Evv.csproj": {}
+    "C:\\Users\\lolyp\\Source\\Repos\\EVV\\Evv\\Evv\\Evv.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Caspe\\Desktop\\Project\\Evv\\Evv\\Evv.csproj": {
+    "C:\\Users\\lolyp\\Source\\Repos\\EVV\\Evv\\Evv\\Evv.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Caspe\\Desktop\\Project\\Evv\\Evv\\Evv.csproj",
+        "projectUniqueName": "C:\\Users\\lolyp\\Source\\Repos\\EVV\\Evv\\Evv\\Evv.csproj",
         "projectName": "Evv",
-        "projectPath": "C:\\Users\\Caspe\\Desktop\\Project\\Evv\\Evv\\Evv.csproj",
-        "packagesPath": "C:\\Users\\Caspe\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Caspe\\Desktop\\Project\\Evv\\Evv\\obj\\",
+        "projectPath": "C:\\Users\\lolyp\\Source\\Repos\\EVV\\Evv\\Evv\\Evv.csproj",
+        "packagesPath": "C:\\Users\\lolyp\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\lolyp\\Source\\Repos\\EVV\\Evv\\Evv\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Caspe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lolyp\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -50,8 +49,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -63,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.109\\RuntimeIdentifierGraph.json"
         }
       }
     }

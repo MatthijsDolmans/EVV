@@ -15,6 +15,7 @@ namespace Evv.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.page = "Home";
             return View();
         }
 
