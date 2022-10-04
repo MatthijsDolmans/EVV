@@ -20,6 +20,9 @@ namespace Evv.Controllers
 
         public IActionResult Privacy()
         {
+            Trip trip = new Trip(200, Vehicle_Modifier.Car_petrol,1);
+            ViewBag.Trip = trip;
+            ViewBag.Score = trip.GetScore();
             return View();
         }
 
