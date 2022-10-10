@@ -2,6 +2,7 @@
 using Evv.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace Evv.Controllers
 {
@@ -16,6 +17,10 @@ namespace Evv.Controllers
 
         public IActionResult Index()
         {
+            if(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier) != null)
+            {
+                SetSession();
+            }
             return View();
         }
 
@@ -31,6 +36,12 @@ namespace Evv.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private void SetSession()
+        {
+            HttpContext.Session.SetString("UserId", User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            Console.WriteLine(HttpContext.Session.GetString("UserId"));
         }
     }
 }

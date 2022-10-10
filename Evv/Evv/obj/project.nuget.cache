@@ -1,8 +1,20 @@
 {
   "version": 2,
-  "dgSpecHash": "d7i6qslTMkc+dsJKROq0ggmfGCialFM+Fh1yL9Gq6jXyYzdvdjjeC/nStHRl2g03CtRzpcNvyhWp34kvCJjjpg==",
+  "dgSpecHash": "jRT9JRP5PYb79dIut5S4V4XTGa+sStAZIpWue9BRi1+y/9BwwiY3gJ+nJ+7DvI3eujYw+8ozkmj9t+IRr3bIlQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dolma\\OneDrive\\Documenten\\proftaak EVV\\Evv\\Evv\\Evv.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Cédric\\OneDrive - Office 365 Fontys\\Bureaublad\\school\\semester2\\Goepsproject\\git\\Evv\\Evv\\Evv.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Cédric\\.nuget\\packages\\auth0.aspnetcore.authentication\\1.0.4\\auth0.aspnetcore.authentication.1.0.4.nupkg.sha512",
+    "C:\\Users\\Cédric\\.nuget\\packages\\microsoft.aspnetcore.authentication.openidconnect\\6.0.9\\microsoft.aspnetcore.authentication.openidconnect.6.0.9.nupkg.sha512",
+    "C:\\Users\\Cédric\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\Cédric\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\6.10.2\\microsoft.identitymodel.jsonwebtokens.6.10.2.nupkg.sha512",
+    "C:\\Users\\Cédric\\.nuget\\packages\\microsoft.identitymodel.logging\\6.10.2\\microsoft.identitymodel.logging.6.10.2.nupkg.sha512",
+    "C:\\Users\\Cédric\\.nuget\\packages\\microsoft.identitymodel.protocols\\6.10.2\\microsoft.identitymodel.protocols.6.10.2.nupkg.sha512",
+    "C:\\Users\\Cédric\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\6.10.2\\microsoft.identitymodel.protocols.openidconnect.6.10.2.nupkg.sha512",
+    "C:\\Users\\Cédric\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.10.2\\microsoft.identitymodel.tokens.6.10.2.nupkg.sha512",
+    "C:\\Users\\Cédric\\.nuget\\packages\\system.identitymodel.tokens.jwt\\6.10.2\\system.identitymodel.tokens.jwt.6.10.2.nupkg.sha512",
+    "C:\\Users\\Cédric\\.nuget\\packages\\system.security.cryptography.cng\\4.5.0\\system.security.cryptography.cng.4.5.0.nupkg.sha512",
+    "C:\\Users\\Cédric\\.nuget\\packages\\system.text.encodings.web\\4.5.1\\system.text.encodings.web.4.5.1.nupkg.sha512"
+  ],
   "logs": []
 }
