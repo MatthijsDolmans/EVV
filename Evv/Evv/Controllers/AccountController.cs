@@ -24,6 +24,7 @@ namespace Evv.Controllers
         {
             //Console.WriteLine(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
             //Console.WriteLine(User.Identity.Name);
+            ViewBag.page = "Account";
             return View();
         }
 

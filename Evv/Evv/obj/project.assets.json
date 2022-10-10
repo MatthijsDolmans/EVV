@@ -476,28 +476,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dolma\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\Caspe\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dolma\\OneDrive\\Documenten\\proftaak EVV\\Evv\\Evv\\Evv.csproj",
+      "projectUniqueName": "C:\\Users\\Caspe\\Desktop\\Project\\Evv\\Evv\\Evv.csproj",
       "projectName": "Evv",
-      "projectPath": "C:\\Users\\dolma\\OneDrive\\Documenten\\proftaak EVV\\Evv\\Evv\\Evv.csproj",
-      "packagesPath": "C:\\Users\\dolma\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dolma\\OneDrive\\Documenten\\proftaak EVV\\Evv\\Evv\\obj\\",
+      "projectPath": "C:\\Users\\Caspe\\Desktop\\Project\\Evv\\Evv\\Evv.csproj",
+      "packagesPath": "C:\\Users\\Caspe\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Caspe\\Desktop\\Project\\Evv\\Evv\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\dolma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Caspe\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"

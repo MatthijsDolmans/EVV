@@ -21,6 +21,7 @@ namespace Evv.Controllers
             {
                 SetSession();
             }
+            ViewBag.page = "Home";
             return View();
         }
 
@@ -29,6 +30,7 @@ namespace Evv.Controllers
             Trip trip = new Trip(viewModel.Distance, Vehicle_Modifier.Motor, viewModel.People);
             viewModel.Distance = trip.GetDistance();
             viewModel.score = trip.CalculateScore();
+            ViewBag.page = "Privacy";
             return View(viewModel);
         }
 
