@@ -7,7 +7,7 @@ namespace Evv.Classes
     {
         private double Distance { get; set; }
         private double Score { get; set; }
-        private int People { get; set; }
+        private int People { get; set; } = 1;
         private string DateCreated { get; set; }
         private Vehicle_Modifier Vehicle_Type { get; set; }
 
@@ -17,6 +17,7 @@ namespace Evv.Classes
             Distance = distance;
             Vehicle_Type = vehicle_Modifier;
             People = people;
+            DefaultPeople();
             DateTime dateTime = DateTime.Now;
             DateCreated = dateTime.ToShortDateString();
             Score = CalculateScore();
@@ -24,12 +25,30 @@ namespace Evv.Classes
 
         public double CalculateScore()
         {
-            Score = Distance * ((double)Vehicle_Type / 1000) / People;
+            double ScoreTest = Distance * ((double)Vehicle_Type / 1000) / People;
+            Score = Math.Round(ScoreTest,2);
+
+            if (Score < 0)
+            {
+                return Score * -1;
+            }
             return Score;
         }
         public double GetDistance()
         {
             return Distance;
+        }
+
+        public int DefaultPeople()
+        {
+            if (People <= 0)
+            {
+                return People = 1;
+            }
+            else
+            {
+                return People;
+            }
         }
     }
 }
