@@ -38,7 +38,6 @@ namespace Evv.Classes
         {
             return Distance;
         }
-
         public int DefaultPeople()
         {
             if (People <= 0)

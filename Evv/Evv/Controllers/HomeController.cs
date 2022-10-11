@@ -15,14 +15,19 @@ namespace Evv.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(TripViewModel viewModel)
         {
             if(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier) != null)
             {
                 SetSession();
             }
             ViewBag.page = "Home";
-            return View();
+            
+            Trip trip = new Trip(viewModel.Distance, viewModel.Vehicle_Modifier, viewModel.People);
+            viewModel.Distance = trip.GetDistance();
+            viewModel.score = trip.CalculateScore();
+            ViewBag.page = "Home";
+            return View(viewModel);
         }
 
         public IActionResult Privacy(TripViewModel viewModel)

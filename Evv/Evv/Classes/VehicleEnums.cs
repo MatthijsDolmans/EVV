@@ -17,12 +17,11 @@
         // Spare
         PT = 20,
 
-        Walk_Bike = 0,
+        Walk_Bike = 8,
         Bike_electric = 6,
 
         Airplane = 182,
 
         Motor = 113,
-
     }
 }

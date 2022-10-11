@@ -7,5 +7,6 @@ namespace Evv.Models
         public double Distance { get; set; }
         public int People { get; set; }
         public double score { get; set; }
+        public Vehicle_Modifier Vehicle_Modifier { get; }
     }
 }

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model TripViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -10,6 +11,7 @@
             </div>
             <div class="card-body">
                 <form>
+                @Html.ValidationSummary()
                     <div class="row" style="margin-right: 8px;margin-left: 8px;">
                         <div class="col" style="padding: 12px;">
                             <div class="form-group">
@@ -17,23 +19,23 @@
                                 <input class="form-control" type="date" />
                             </div>
                         <div class="form-group">
-                            <label class="control-label">People</label>
-                            <input class="form-control" type="text" />
+                            <label asp-for="People" class="control-label">people</label>
+                            <input asp-for="People" type="text" class="form-control" placeholder="1" />
                         </div>
                         </div>
                         <div class="col-lg-5" style="padding: 12px;">
                                 <div class="form-group">
                                     <label class="control-label">Means of transport</label>
-                                    <select name="vehicles" class="form-control">
-                                        <option value="bike">Bike</option>
-                                        <option value="car">Car</option>
-                                        <option value="motorcycle">Motorcycle</option>
-                                        <option value="plane">Plane</option>
+                                    <select asp-for="Vehicle_Modifier" name="vehicles" class="form-control">
+                                        <option value="Scooter_electric">Scooter - Electric</option>
+                                        <option value="car">Car - Gas</option>
+                                        <option value="motorcycle">Bike/Walk</option>
+                                        <option value="plane">Motor</option>    
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">Distance</label>
-                                    <input class="form-control" type="text" />
+                                   <label asp-for="Distance" class="control-label">Distance</label>
+                                   <input asp-for="Distance" class="form-control" type="text" placeholder="Enter distance" />
                                 </div>
                         </div>
                         <div class="col d-flex d-sm-flex d-lg-flex flex-column align-items-center justify-content-sm-center align-items-sm-center align-items-lg-center" style="padding: 12px;">
@@ -43,6 +45,13 @@
                         </div>
                     </div>
                 </form>
+            @if (Model.score.ToString() != "NaN")
+            {
+                <section>
+                    <h1> @Model.score </h1>
+                </section>
+
+            }
             </div>
         </div>
 </div>
