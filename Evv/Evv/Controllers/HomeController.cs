@@ -30,9 +30,14 @@ namespace Evv.Controllers
             return View(viewModel);
         }
 
+       // public IActionResult Index()
+      //  {
+      //      return View();
+     //   }
+
         public IActionResult Privacy(TripViewModel viewModel)
         {
-            Trip trip = new Trip(viewModel.Distance, Vehicle_Modifier.Motor, viewModel.People);
+            Trip trip = new Trip(viewModel.Distance, viewModel.Vehicle_Modifier, viewModel.People);
             viewModel.Distance = trip.GetDistance();
             viewModel.score = trip.CalculateScore();
             ViewBag.page = "Privacy";

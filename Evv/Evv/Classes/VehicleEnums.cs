@@ -15,9 +15,9 @@
         Car_diesel = 180,
 
         // Spare
-        PT = 20,
+        Public_Transport = 20,
 
-        Walk_Bike = 8,
+        Walk_Bike = 0,
         Bike_electric = 6,
 
         Airplane = 182,
