@@ -1,8 +1,11 @@
-﻿namespace Evv.Classes
+﻿using System.ComponentModel;
+
+namespace Evv.Classes
 {
     public enum Vehicle_Modifier
     {
         // Scooter
+        [Description("Scooter - Petrol")]
         Scooter_petrol = 56,
         Scooter_electric = 23,
 
