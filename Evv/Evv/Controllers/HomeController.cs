@@ -23,9 +23,10 @@ namespace Evv.Controllers
             }
             ViewBag.page = "Home";
             
-            Trip trip = new Trip(viewModel.Distance, viewModel.Vehicle_Modifier, viewModel.People);
+            Trip trip = new Trip(viewModel.Distance, viewModel.Vehicle_Modifier, viewModel.People,viewModel.DateCreated);
             viewModel.Distance = trip.GetDistance();
             viewModel.score = trip.CalculateScore();
+            viewModel.DateCreated = trip.GetDate();
             ViewBag.page = "Home";
             return View(viewModel);
         }
@@ -35,14 +36,7 @@ namespace Evv.Controllers
       //      return View();
      //   }
 
-        public IActionResult Privacy(TripViewModel viewModel)
-        {
-            Trip trip = new Trip(viewModel.Distance, viewModel.Vehicle_Modifier, viewModel.People);
-            viewModel.Distance = trip.GetDistance();
-            viewModel.score = trip.CalculateScore();
-            ViewBag.page = "Privacy";
-            return View(viewModel);
-        }
+  
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

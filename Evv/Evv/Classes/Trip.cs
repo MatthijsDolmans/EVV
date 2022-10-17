@@ -8,18 +8,17 @@ namespace Evv.Classes
         private double Distance { get; set; }
         private double Score { get; set; }
         private int People { get; set; } = 1;
-        private string DateCreated { get; set; }
+        private DateTime DateCreated { get; set; }
         private Vehicle_Modifier Vehicle_Type { get; set; }
 
 
-        public Trip(double distance, Vehicle_Modifier vehicle_Modifier, int people)
+        public Trip(double distance, Vehicle_Modifier vehicle_Modifier, int people, DateTime datecreated)
         {
             Distance = distance;
             Vehicle_Type = vehicle_Modifier;
             People = people;
             DefaultPeople();
-            DateTime dateTime = DateTime.Now;
-            DateCreated = dateTime.ToShortDateString();
+            DateCreated = datecreated;
             Score = CalculateScore();
         }
 
@@ -48,6 +47,10 @@ namespace Evv.Classes
             {
                 return People;
             }
+        }
+        public DateTime GetDate()
+        {
+            return DateCreated;
         }
     }
 }

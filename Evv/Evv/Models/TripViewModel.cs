@@ -9,6 +9,7 @@ public class TripViewModel
     public double Distance { get; set; }
     public int People { get; set; }
     public double score { get; set; }
+    public DateTime DateCreated { get; set; } = DateTime.Now;
     public Vehicle_Modifier Vehicle_Modifier { get; set; }
     public SelectList VehicleModifierSelectList {get        
         {

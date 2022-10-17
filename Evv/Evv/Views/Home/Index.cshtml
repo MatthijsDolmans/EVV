@@ -17,12 +17,12 @@
                     <div class="row" style="margin-right: 8px;margin-left: 8px;">
                         <div class="col" style="padding: 12px;">
                             <div class="form-group">
-                                <label class="control-label">Date</label>
-                                <input class="form-control" type="date" />
+                            <label asp-for="DateCreated" class="control-label">Date</label>
+                            <input asp-for="DateCreated" class="form-control" type="date" value="@DateTime.Now" />
                             </div>
                         <div class="form-group">
                             <label asp-for="People" class="control-label">people</label>
-                            <input asp-for="People" type="text" class="form-control" placeholder="Enter amount of people" value="1" />
+                            <input asp-for="People" type="number" class="form-control" placeholder="Enter amount of people" />
                         </div>
                         </div>
                         <div class="col-lg-5" style="padding: 12px;">
@@ -31,8 +31,8 @@
                             @Html.DropDownList(nameof(Model.Vehicle_Modifier), Model.VehicleModifierSelectList, new { @class = "form-control"})
                         </div>
                                 <div class="form-group">
-                                   <label asp-for="Distance" class="control-label">Distance</label>
-                                   <input asp-for="Distance" class="form-control" type="text" placeholder="Enter distance" />
+                                   <label asp-for="Distance" class="control-label">Distance (KM)</label>
+                                   <input asp-for="Distance" class="form-control" type="number" placeholder="Enter distance" />
                                 </div>
                         </div>
                         <div class="col d-flex d-sm-flex d-lg-flex flex-column align-items-center justify-content-sm-center align-items-sm-center align-items-lg-center" style="padding: 12px;">
@@ -47,7 +47,7 @@
                 <section>
                     <hr>
                     <br>
-                    <p> vehicle: @Model.Vehicle_Modifier.GetDescription() <br> score: @Model.score <br> people: @Model.People <br> distance: @Model.Distance <br> Date: W.I.P.</p>
+                    <p> Vehicle: @Model.Vehicle_Modifier.GetDescription() <br> Score: @Model.score <br> People: @Model.People <br> Distance: @Model.Distance <br> Date: @Model.DateCreated.ToString("dd/MM/yyyy")</p>
                     <br>
                 </section>
 
