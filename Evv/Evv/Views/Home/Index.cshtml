@@ -42,16 +42,12 @@
                         </div>
                     </div>
                 </form>
-            @if (Model.score.ToString() != "NaN")
-            {
                 <section>
                     <hr>
                     <br>
                     <p> Vehicle: @Model.Vehicle_Modifier.GetDescription() <br> Score: @Model.score <br> People: @Model.People <br> Distance: @Model.Distance <br> Date: @Model.DateCreated.ToString("dd/MM/yyyy")</p>
                     <br>
                 </section>
-
-            }
             </div>
         </div>
 </div>
