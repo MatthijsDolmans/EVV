@@ -57,6 +57,7 @@
     <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="~/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" type="text/css" href="/scoreboard/css/style.css">
 </head>
 
 <body id="page-top">
@@ -73,35 +74,24 @@
                             <li class="nav-item"><a class="nav-link active" href="/Home/index"><i class="fas fa-suitcase"></i><span>Add a trip</span></a></li>
                             <li class="nav-item"><a class="nav-link" href="/Overview/index"><i class="fas fa-window-maximize"></i><span>Overview</span></a></li>
                             <li class="nav-item"><a class="nav-link" href="/Leaderboard/index"><i class="fas fa-trophy"></i><span>Leaderboard</span></a></li>
-                            <li class="nav-item"><a class="nav-link" href="/Home/privacy"><i class="fas fa-user"></i><span>Add trip</span></a></li>
                         }
                         else if(ViewBag.page == "Leaderboard")
                         {
                             <li class="nav-item"><a class="nav-link" href="/Home/index"><i class="fas fa-suitcase"></i><span>Add a trip</span></a></li>
                             <li class="nav-item"><a class="nav-link" href="/Overview/index"><i class="fas fa-window-maximize"></i><span>Overview</span></a></li>
                             <li class="nav-item"><a class="nav-link active" href="/Leaderboard/index"><i class="fas fa-trophy"></i><span>Leaderboard</span></a></li>
-                            <li class="nav-item"><a class="nav-link" href="/Home/privacy"><i class="fas fa-user"></i><span>Add trip</span></a></li>
                         }
                         else if(ViewBag.page == "Overview")
                         {
                             <li class="nav-item"><a class="nav-link" href="/Home/index"><i class="fas fa-suitcase"></i><span>Add a trip</span></a></li>
                             <li class="nav-item"><a class="nav-link active" href="/Overview/index"><i class="fas fa-window-maximize"></i><span>Overview</span></a></li>
                             <li class="nav-item"><a class="nav-link" href="/Leaderboard/index"><i class="fas fa-trophy"></i><span>Leaderboard</span></a></li>
-                            <li class="nav-item"><a class="nav-link" href="/Home/privacy"><i class="fas fa-user"></i><span>Add trip</span></a></li>
-                        }
-                        else if (ViewBag.page == "Privacy")
-                        {
-                            <li class="nav-item"><a class="nav-link" href="/Home/index"><i class="fas fa-suitcase"></i><span>Add a trip</span></a></li>
-                            <li class="nav-item"><a class="nav-link" href="/Overview/index"><i class="fas fa-window-maximize"></i><span>Overview</span></a></li>
-                            <li class="nav-item"><a class="nav-link" href="/Leaderboard/index"><i class="fas fa-trophy"></i><span>Leaderboard</span></a></li>
-                            <li class="nav-item"><a class="nav-link active" href="/Home/privacy"><i class="fas fa-user"></i><span>Add trip</span></a></li>
                         }
                         else
                         {
                             <li class="nav-item"><a class="nav-link" href="/Home/index"><i class="fas fa-suitcase"></i><span>Add a trip</span></a></li>
                             <li class="nav-item"><a class="nav-link" href="/Overview/index"><i class="fas fa-window-maximize"></i><span>Overview</span></a></li>
                             <li class="nav-item"><a class="nav-link" href="/Leaderboard/index"><i class="fas fa-trophy"></i><span>Leaderboard</span></a></li>
-                            <li class="nav-item"><a class="nav-link" href="/Home/privacy"><i class="fas fa-user"></i><span>Add trip</span></a></li>
                         }
                     }
 

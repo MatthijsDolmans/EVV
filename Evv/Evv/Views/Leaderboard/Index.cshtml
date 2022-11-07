@@ -1,8 +1,112 @@
 ﻿@{
+
     ViewData["Title"] = "Home Page";
 }
 
+
 <div class="text-center">
-    <h1 class="display-4">Hij doet het</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+	<section class="main-content">
+		<div class="container">
+			<h1>Rankings</h1>
+			<br>
+			<br>
+
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="leaderboard-card leaderboard-card--Second">
+						<div class="leaderboard-card__top">
+							<h3 class="text-center">2nd!</h3>
+						</div>
+						<div class="leaderboard-card__body">
+							<div class="text-center">
+								<img src="~/scoreboard/img/user1.jpg" class="circle-img mb-2" alt="User Img">
+								<h5 class="mb-0">Harry</h5>
+								<p class="text-muted mb-0">500 Points</p>
+								<hr>
+								<div class="d-flex justify-content-between align-items-center">
+									<span>Most used mode of transport: </span>
+									<span>Bike</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="leaderboard-card leaderboard-card--first">
+						<div class="leaderboard-card__top">
+							<h3 class="text-center">1st!</h3>
+						</div>
+						<div class="leaderboard-card__body">
+							<div class="text-center">
+								<img src="~/scoreboard/img/user2.jpg" class="circle-img mb-2" alt="User Img">
+								<h5 class="mb-0">Bats</h5>
+								<p class="text-muted mb-0">1000 Points</p>
+								<hr>
+								<div class="d-flex justify-content-between align-items-center">
+									<span>Most used mode of transport: </span>
+									<span>Plane</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="leaderboard-card leaderboard-card--Third">
+						<div class="leaderboard-card__top">
+							<h3 class="text-center">3rd!</h3>
+						</div>
+						<div class="leaderboard-card__body">
+							<div class="text-center">
+								<img src="~/scoreboard/img/user3.jpg" class="circle-img mb-2" alt="User Img">
+								<h5 class="mb-0">Bak</h5>
+								<p class="text-muted mb-0">200 Points</p>
+								<hr>
+								<div class="d-flex justify-content-between align-items-center">
+									<span>Most used mode of transport: </span>
+									<span>Train</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<h4>All Users</h4>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>User</th>
+						<th>Points</th>
+						<th>Function</th>
+						<th>Mode of transport</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<div class="d-flex align-items-center">
+								<img src="~/scoreboard/img/user4.jpg" class="circle-img circle-img--small mr-2" alt="User Img">
+								<div class="user-info__basic">
+									<h5 class="mb-0">sumin</h5>
+									<p class="text-muted mb-0">Place: 5th</p>
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="d-flex align-items-baseline">
+								<h4 class="mr-1">100</h4>
+							</div>
+						</td>
+						<td>CEO</td>
+						<td>Bike</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </div>
