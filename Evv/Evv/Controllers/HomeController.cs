@@ -35,15 +35,6 @@ namespace Evv.Controllers
       //      return View();
      //   }
 
-        public IActionResult Privacy(TripViewModel viewModel)
-        {
-            Trip trip = new Trip(viewModel.Distance, viewModel.Vehicle_Modifier, viewModel.People);
-            viewModel.Distance = trip.GetDistance();
-            viewModel.score = trip.CalculateScore();
-            ViewBag.page = "Privacy";
-            return View(viewModel);
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
