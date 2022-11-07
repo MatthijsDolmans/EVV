@@ -1,61 +1,57 @@
-﻿@{
+﻿@model TripViewModel
+@using Evv.Helpers;
+@{
+
     ViewData["Title"] = "Home Page";
 }
 
 <div class="container-fluid">
-        <h3 class="text-dark mb-4">Team</h3>
+        <h3 class="text-dark mb-4">Add a trip</h3>
         <div class="card shadow">
             <div class="card-header py-3">
-                <p class="text-primary m-0 fw-bold">Employee Info</p>
+                <p class="text-primary m-0 fw-bold">Trip Info</p>
             </div>
             <div class="card-body">
-                <div class="row" style="margin-right: 8px;margin-left: 8px;">
-                            <div class="col" style="padding: 12px;">
-                                <v-date-picker :min-date="todayDate" v-model='form.Date' />
+                <form>
+                @Html.ValidationSummary()
+                    <div class="row" style="margin-right: 8px;margin-left: 8px;">
+                        <div class="col" style="padding: 12px;">
+                            <div class="form-group">
+                                <label class="control-label">Date</label>
+                                <input class="form-control" type="date" />
                             </div>
-                            <div class="col-lg-5" style="padding: 12px;">
-                                <form>
-                                    <div class="form-group">
-                                        <label class="control-label">Start time</label>
-                                        <input class="form-control" type="time" v-model='form.StartTime' />
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">End time</label>
-                                        <input class="form-control" type="time" v-model='form.EndTime' />
-                                    </div>
-                                    <div class="form-group">
-                                        <label  class="control-label">Person amount</label>
-                                        <input :disabled="selectedRoomType == 'Work Place'"  class="form-control" type="number" v-model='form.Guests'/>
-                                    </div>
-
-                                    <div class="row" style="margin-top: 7px;">
-                                        <div class="col" v-for="roomType in roomTypes" v-bind:key="roomType">
-                                            <div class="form-check">
-                                                <input class="form-check-input" v-model="selectedRoomType" type="radio" name="roomType" :value="roomType">
-                                                <label class="form-check-label">{{ roomType }}</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div v-show="selectedRoomType == 'Meeting Room'" class="card">
-                                        <div class="card-body" style="padding: 13px;">
-                                            @* Facilities card*@
-                                            <h4 class="card-title" style="font-size: 16px;">Facilities:</h4>
-                                            <div v-for="facility in facilities" :key="facility.id" class="form-check">
-                                                <input class="form-check-input" type="checkbox" style="font-size: 13px;" v-model="selectedFacilities" :value="facility.id">
-                                                <label class="form-check-label" style="font-size: 13px;">{{ facility.name }}</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-
-                            </div>
-                            
-                            <div class="col d-flex d-sm-flex d-lg-flex flex-column align-items-center justify-content-sm-center align-items-sm-center align-items-lg-center" style="padding: 12px;">
-                                <h4 v-if="noAvailableRooms" class="text-center d-lg-flex justify-content-lg-center" style="color: rgb(173,29,29);">All the rooms are booked on your given input. Try another date or time.</h4>
-                                <button v-on:click="getAvailableRoom()" class="btn btn-primary d-flex d-lg-flex Color" >Book room</button>
+                        <div class="form-group">
+                            <label asp-for="People" class="control-label">people</label>
+                            <input asp-for="People" type="text" class="form-control" placeholder="Enter amount of people" value="1" />
+                        </div>
+                        </div>
+                        <div class="col-lg-5" style="padding: 12px;">
+                        <div class="form-group">
+                            <label class="control-label">Means of transport</label>
+                            @Html.DropDownList(nameof(Model.Vehicle_Modifier), Model.VehicleModifierSelectList, new { @class = "form-control"})
+                        </div>
+                                <div class="form-group">
+                                   <label asp-for="Distance" class="control-label">Distance</label>
+                                   <input asp-for="Distance" class="form-control" type="text" placeholder="Enter distance" />
+                                </div>
+                        </div>
+                        <div class="col d-flex d-sm-flex d-lg-flex flex-column align-items-center justify-content-sm-center align-items-sm-center align-items-lg-center" style="padding: 12px;">
+                            <div class="form-group">
+                                <input class="form-control btn btn-primary" type="submit" value="Add trip"/>
                             </div>
                         </div>
+                    </div>
+                </form>
+            @if (Model.score.ToString() != "NaN")
+            {
+                <section>
+                    <hr>
+                    <br>
+                    <p> vehicle: @Model.Vehicle_Modifier.GetDescription() <br> score: @Model.score <br> people: @Model.People <br> distance: @Model.Distance <br> Date: W.I.P.</p>
+                    <br>
+                </section>
+
+            }
             </div>
         </div>
 </div>
