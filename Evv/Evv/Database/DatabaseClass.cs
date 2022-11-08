@@ -6,7 +6,7 @@ namespace Evv.Database
     {
         private string ConnectionString = "Data Source=cgievv.database.windows.net;Initial Catalog=FHICT-EVV;Persist Security Info=True;User ID=login;Password=CGIevv123";
 
-        public void AddTrip(double score, double lenght, string dag, string accountId, string transport)
+        public void AddTrip(double score, double lenght, DateTime dag, string accountId, string transport)
         {
             string Query = "INSERT INTO [dbo].[Trip]([Date],[Score],[acountId],[Distance],[Transport])VALUES(@date,@score,@acountId,@distance,@transport)";
 
