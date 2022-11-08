@@ -23,7 +23,7 @@ namespace Evv.Controllers
             }
             ViewBag.page = "Home";
             
-            Trip trip = new Trip(viewModel.Distance, viewModel.Vehicle_Modifier, viewModel.People);
+            Trip trip = new Trip(viewModel.Distance, viewModel.Vehicle_Modifier, viewModel.People, HttpContext.Session.GetString("UserId"));
             viewModel.Distance = trip.GetDistance();
             viewModel.score = trip.CalculateScore();
             ViewBag.page = "Home";
@@ -37,7 +37,7 @@ namespace Evv.Controllers
 
         public IActionResult Privacy(TripViewModel viewModel)
         {
-            Trip trip = new Trip(viewModel.Distance, viewModel.Vehicle_Modifier, viewModel.People);
+            Trip trip = new Trip(viewModel.Distance, viewModel.Vehicle_Modifier, viewModel.People, HttpContext.Session.GetString("UserId"));
             viewModel.Distance = trip.GetDistance();
             viewModel.score = trip.CalculateScore();
             ViewBag.page = "Privacy";
