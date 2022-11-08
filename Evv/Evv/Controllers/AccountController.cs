@@ -48,6 +48,7 @@ namespace Evv.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme
             );
             HttpContext.Session.Remove("UserId");
+
         }
     }
 }

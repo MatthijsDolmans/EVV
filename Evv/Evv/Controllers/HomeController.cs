@@ -23,7 +23,7 @@ namespace Evv.Controllers
             }
             ViewBag.page = "Home";
             
-            Trip trip = new Trip(viewModel.Distance, viewModel.Vehicle_Modifier, viewModel.People,viewModel.DateCreated);
+            Trip trip = new Trip(viewModel.Distance, viewModel.Vehicle_Modifier, viewModel.People,viewModel.DateCreated, HttpContext.Session.GetString("UserId"));
             viewModel.Distance = trip.GetDistance();
             viewModel.score = trip.CalculateScore();
             viewModel.DateCreated = trip.GetDate();

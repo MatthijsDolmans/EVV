@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Evv.Database;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Xml.Linq;
 
 namespace Evv.Classes
@@ -12,14 +13,20 @@ namespace Evv.Classes
         private Vehicle_Modifier Vehicle_Type { get; set; }
 
 
-        public Trip(double distance, Vehicle_Modifier vehicle_Modifier, int people, DateTime datecreated)
+        public Trip(double distance, Vehicle_Modifier vehicle_Modifier, int people, DateTime datecreated, string accountId)
         {
+            DatabaseClass database = new DatabaseClass();
             Distance = distance;
             Vehicle_Type = vehicle_Modifier;
             People = people;
             DefaultPeople();
             DateCreated = datecreated;
             Score = CalculateScore();
+            if (Score != null && Distance != null && DateCreated != null && accountId != null && Distance != 0)
+            {
+                Console.WriteLine(accountId);
+                database.AddTrip(Score, Distance, DateCreated, accountId, Vehicle_Type.ToString());
+            }
         }
 
         public double CalculateScore()
