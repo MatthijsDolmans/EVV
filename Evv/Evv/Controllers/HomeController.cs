@@ -1,7 +1,10 @@
 ﻿using Evv.Classes;
+using Evv.Database;
 using Evv.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Net.Mail;
 using System.Security.Claims;
 
 namespace Evv.Controllers
@@ -15,12 +18,21 @@ namespace Evv.Controllers
             _logger = logger;
         }
 
+        [Authorize]
         public IActionResult Index(TripViewModel viewModel)
         {
+            bool HasData = true;
+
             if(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier) != null)
             {
                 SetSession();
             }
+
+            if (HttpContext.Session.GetString("UserId") != null)
+            {
+                HasData = HasAllUserData();
+            }
+
             ViewBag.page = "Home";
             
             Trip trip = new Trip(viewModel.Distance, viewModel.Vehicle_Modifier, viewModel.People,viewModel.DateCreated, HttpContext.Session.GetString("UserId"));
@@ -28,7 +40,17 @@ namespace Evv.Controllers
             viewModel.score = trip.CalculateScore();
             viewModel.DateCreated = trip.GetDate();
             ViewBag.page = "Home";
-            return View(viewModel);
+
+            if (!HasData)
+            {
+                string userid = HttpContext.Session.GetString("UserId");
+
+                return RedirectToAction("PersonalData", "Account", new { UserId = userid});
+            }
+            else
+            {
+                return View(viewModel);
+            }
         }
 
        // public IActionResult Index()
@@ -47,7 +69,26 @@ namespace Evv.Controllers
         private void SetSession()
         {
             HttpContext.Session.SetString("UserId", User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+
             Console.WriteLine(HttpContext.Session.GetString("UserId"));
+        }
+
+        [Authorize]
+        private bool HasAllUserData()
+        {
+            string userId = HttpContext.Session.GetString("UserId");
+
+            DatabaseClass databaseClass = new DatabaseClass();
+            Account account = databaseClass.GetCurentUserData(userId);
+
+            if(account.FirstName == null || account.FirstName == "")
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

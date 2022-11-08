@@ -5,6 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Evv.Classes;
+using Evv.Models;
+using Evv.Database;
+using System.Net.Mail;
 
 namespace Evv.Controllers
 {
@@ -49,6 +53,30 @@ namespace Evv.Controllers
             );
             HttpContext.Session.Remove("UserId");
 
+        }
+
+        [Authorize]
+        public IActionResult PersonalData(string UserId)
+        {
+            AccountViewModel accountViewModel = new AccountViewModel();
+            accountViewModel.Id = UserId;
+
+            return View(accountViewModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult PersonalData(string id, string firstname, string lastname)
+        {
+            DatabaseClass databaseClass = new DatabaseClass();
+            string userId = HttpContext.Session.GetString("UserId");
+            
+            if(databaseClass.UpdateUser(firstname, lastname, id) < 1)
+            {
+                databaseClass.CreateUser(firstname, lastname, id);
+            }
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
