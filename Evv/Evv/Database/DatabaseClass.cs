@@ -35,7 +35,7 @@ namespace Evv.Database
         {
             Account account = new Account();
 
-            string Query = "SELECT * FROM Account WHERE auth0id = @userId";
+            string Query = "SELECT * FROM Account WHERE id = @userId";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -48,11 +48,9 @@ namespace Evv.Database
                 {
                     while (reader.Read())
                     {
-                        account.ID = Convert.ToInt32(reader["id"]);
-                        account.Email = reader["email"].ToString();
+                        account.ID = reader["id"].ToString();
                         account.FirstName = reader["first_name"].ToString();
                         account.LastName = reader["last_name"].ToString();
-                        account.pass = reader["pass"].ToString();
                     }
 
                     conn.Close();
@@ -64,7 +62,7 @@ namespace Evv.Database
 
         public void CreateUser(string firstname, string lastname, string auth0id)
         {
-            string Query = "INSERT INTO Account (id, email, first_name, last_name, pass, isAdmin, auth0id) VALUES(@id, @email, @first_name, @last_name, @pass, @isAdmin, @auth0id)";
+            string Query = "INSERT INTO Account (id, first_name, last_name, isAdmin) VALUES(@id, @first_name, @last_name, @isAdmin)";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -72,13 +70,10 @@ namespace Evv.Database
 
                 SqlCommand comm = conn.CreateCommand();
                 comm.CommandText = Query;
-                comm.Parameters.AddWithValue("@id", GetNextId());
-                comm.Parameters.AddWithValue("@email", "");
+                comm.Parameters.AddWithValue("@id", auth0id);
                 comm.Parameters.AddWithValue("@first_name", firstname);
                 comm.Parameters.AddWithValue("@last_name", lastname);
-                comm.Parameters.AddWithValue("@pass", "");
                 comm.Parameters.AddWithValue("@isAdmin", false);
-                comm.Parameters.AddWithValue("@auth0id", auth0id);
                 comm.ExecuteNonQuery();
             }
         }
@@ -87,7 +82,7 @@ namespace Evv.Database
         {
             int rowsaffected = 0;
 
-            string Query = "UPDATE Account SET first_name = @first_name, last_name = @last_name WHERE auth0id = @auth0id";
+            string Query = "UPDATE Account SET first_name = @first_name, last_name = @last_name WHERE id = @id";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -97,7 +92,7 @@ namespace Evv.Database
                 comm.CommandText = Query;
                 comm.Parameters.AddWithValue("@first_name", firstname);
                 comm.Parameters.AddWithValue("@last_name", lastname);
-                comm.Parameters.AddWithValue("@auth0id", auth0id);
+                comm.Parameters.AddWithValue("@id", auth0id);
                 rowsaffected = comm.ExecuteNonQuery();
             }
 

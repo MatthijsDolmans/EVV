@@ -14,7 +14,7 @@ namespace Evv.Controllers
 {
     public class AccountController : Controller
     {
-        [Route("Login")]
+        //[Route("Login")]
         public async Task Login(string returnUrl = "/")
         {
             var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
