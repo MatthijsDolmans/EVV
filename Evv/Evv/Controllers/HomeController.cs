@@ -80,7 +80,6 @@ namespace Evv.Controllers
 
             DatabaseClass databaseClass = new DatabaseClass();
             Account account = databaseClass.GetCurentUserData(userId);
-
             if(account.FirstName == null || account.FirstName == "")
             {
                 return false;
