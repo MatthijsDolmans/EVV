@@ -6,12 +6,12 @@ namespace Evv.Classes
 {
     public class Trip
     {
-        private double Distance { get; set; }
-        private double Score { get; set; }
-        private int People { get; set; } = 1;
-        private DateTime DateCreated { get; set; }
-        private Vehicle_Modifier Vehicle_Type { get; set; }
-
+        public double Distance { get; private set; }
+        public double Score { get; private set; }
+        public int People { get; private set; } = 1;
+        public DateTime DateCreated { get; private set;}
+        public Vehicle_Modifier Vehicle_Type { get; private set; }
+        public string Vehicle { get; set; }
 
         public Trip(double distance, Vehicle_Modifier vehicle_Modifier, int people, DateTime datecreated, string accountId)
         {
@@ -27,6 +27,12 @@ namespace Evv.Classes
                 Console.WriteLine(accountId);
                 database.AddTrip(Score, Distance, DateCreated, accountId, Vehicle_Type.ToString());
             }
+        }
+        public Trip(double distance, string vehicle_Modifier, DateTime datecreated)
+        {
+            Distance = distance;
+            Vehicle = vehicle_Modifier;
+            DateCreated = datecreated;
         }
 
         public double CalculateScore()

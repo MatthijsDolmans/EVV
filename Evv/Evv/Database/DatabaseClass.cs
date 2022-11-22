@@ -5,13 +5,13 @@ using System.Globalization;
 using System.Data.Common;
 using Evv.Classes;
 using System.Security.Principal;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Evv.Database
 {
     public class DatabaseClass
     {
         private string ConnectionString = "Data Source=cgievv.database.windows.net;Initial Catalog=FHICT-EVV;Persist Security Info=True;User ID=login;Password=CGIevv123";
-
         public void AddTrip(double score, double lenght, DateTime dag, string accountId, string transport)
         {
             string Query = "INSERT INTO [dbo].[Trip]([Date],[Score],[acountId],[Distance],[Transport])VALUES(@date,@score,@acountId,@distance,@transport)";
@@ -123,6 +123,36 @@ namespace Evv.Database
 
             return count + 1;
         }
+        public List<Trip> GetTrips(string userId)
+        {
+            List<Trip> ListWithTrips = new();
+            
+            string Query = "SELECT * FROM Trip WHERE acountId = @userId";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                SqlCommand comm = new SqlCommand(Query, conn);
+                comm.Parameters.AddWithValue("@userId", userId);
+
+                conn.Open();
+
+                using (SqlDataReader reader = comm.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        Trip trip = new Trip(Convert.ToDouble(reader["Distance"]), reader["Transport"].ToString() ,Convert.ToDateTime(reader["Date"]));
+                        ListWithTrips.Add(trip);
+                    }
+
+                    conn.Close();
+                }
+            }
+
+            return ListWithTrips;
+        }
+
+
 
     }
 }

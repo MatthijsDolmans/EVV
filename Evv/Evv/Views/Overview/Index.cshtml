@@ -1,4 +1,5 @@
-﻿@{
+﻿@model OverviewViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -36,39 +37,18 @@
                                 <th>Penalty points</th>
                             </tr>
                         </thead>
-                        @foreach()
-                        <tbody>
-                            <tr>
-                                <td>10/10/2022</td>
-                                <td>Bike</td>
-                                <td>10KM</td>
-                                <td>0</td>
-                            </tr>
-                             <tr>
-                                <td>09/10/2022</td>
-                                <td>Car</td>
-                                <td>20KM</td>
-                                <td>150</td>
-                            </tr>
-                             <tr>
-                                <td>09/10/2022</td>
-                                <td>Plane</td>
-                                <td>100KM</td>
-                                <td>1230</td>
-                            </tr>
-                             <tr>
-                                <td>08/10/2022</td>
-                                <td>Bike</td>
-                                <td>10KM</td>
-                                <td>0</td>
-                            </tr>
-                             <tr>
-                                <td>07/10/2022</td>
-                                <td>Motorcycle</td>
-                                <td>26KM</td>
-                                <td>45</td>
-                            </tr>
-                        </tbody>
+                        @foreach(var trip in Model.trips)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td>@trip.DateCreated</td>
+                                    <td>@trip.Vehicle</td>
+                                    <td>@trip.Distance</td>
+                                    <td>0</td>
+                                </tr>
+                            </tbody>
+                        }
+
                         <tfoot>
                             <tr>
                                 <td><strong>Date</strong></td>
