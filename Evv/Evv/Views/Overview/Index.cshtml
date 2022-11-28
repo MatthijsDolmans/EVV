@@ -24,7 +24,7 @@
                         <div style="opacity: 0;" class="text-md-end dataTables_filter" id="dataTable_filter"><label class="form-label"><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
                     </div>
                 <div>
-                    <p>Total amount of penalty points: @Model.totalscore</p>
+                    <p>Total amount of penalty points: @Model.totalscore.ToString("#.##")</p>
                 </div>
                 </div>
                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
