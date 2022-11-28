@@ -1,4 +1,5 @@
-﻿@{
+﻿@model OverviewViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -23,7 +24,7 @@
                         <div style="opacity: 0;" class="text-md-end dataTables_filter" id="dataTable_filter"><label class="form-label"><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
                     </div>
                 <div>
-                    <p>Total amount of penalty points: 1425</p>
+                    <p>Total amount of penalty points: @Model.totalscore</p>
                 </div>
                 </div>
                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
@@ -36,39 +37,18 @@
                                 <th>Penalty points</th>
                             </tr>
                         </thead>
-                        @foreach()
-                        <tbody>
-                            <tr>
-                                <td>10/10/2022</td>
-                                <td>Bike</td>
-                                <td>10KM</td>
-                                <td>0</td>
-                            </tr>
-                             <tr>
-                                <td>09/10/2022</td>
-                                <td>Car</td>
-                                <td>20KM</td>
-                                <td>150</td>
-                            </tr>
-                             <tr>
-                                <td>09/10/2022</td>
-                                <td>Plane</td>
-                                <td>100KM</td>
-                                <td>1230</td>
-                            </tr>
-                             <tr>
-                                <td>08/10/2022</td>
-                                <td>Bike</td>
-                                <td>10KM</td>
-                                <td>0</td>
-                            </tr>
-                             <tr>
-                                <td>07/10/2022</td>
-                                <td>Motorcycle</td>
-                                <td>26KM</td>
-                                <td>45</td>
-                            </tr>
-                        </tbody>
+                        @foreach(var trip in Model.trips)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td>@trip.DateCreated.ToString("dd/MM/yyyy")</td>
+                                    <td>@trip.Vehicle.Replace("_"," ")</td>
+                                    <td>@trip.Distance</td>
+                                    <td>@trip.Score</td>
+                                </tr>
+                            </tbody>
+                        }
+
                         <tfoot>
                             <tr>
                                 <td><strong>Date</strong></td>
