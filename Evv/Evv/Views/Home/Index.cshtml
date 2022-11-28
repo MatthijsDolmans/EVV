@@ -22,26 +22,25 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="People" class="control-label">People</label>
-                            <input asp-for="People" type="number" class="form-control" placeholder="Enter amount of people" />
+                            <input asp-for="People" type="number" class="form-control" placeholder="Enter amount of people" value="1" id="PeopleInput"/>
                         </div>
                     </div>
                     <div class="col-lg-5" style="padding: 12px;">
                         <div class="form-group">
                             <label class="control-label">Means of transport</label>
-                            @Html.DropDownList(nameof(Model.Vehicle_Modifier), Model.VehicleModifierSelectList, new { @class = "form-control"})
+                            @Html.DropDownList(nameof(Model.Vehicle_Modifier), Model.VehicleModifierSelectList, new { @class = "form-control", @onchange = "SetState()", @id = "ModeOfTransport"})
                         </div>
-                        <div class="form-group">
-                            <label asp-for="Distance" class="control-label">Distance (KM)</label>
-                            <input asp-for="Distance" class="form-control" type="number" placeholder="Enter distance" />
+                                <div class="form-group">
+                                   <label asp-for="Distance" class="control-label">Distance (KM)</label>
+                                   <input asp-for="Distance" class="form-control" type="text" placeholder="Enter distance" />
+                                </div>
+                        </div>
+                        <div class="col d-flex d-sm-flex d-lg-flex flex-column align-items-center justify-content-sm-center align-items-sm-center align-items-lg-center" style="padding: 12px;">
+                            <div class="form-group">
+                                <input class="form-control btn btn-primary" type="submit" value="Add trip"/>
+                            </div>
                         </div>
                     </div>
-                        
-                </div>
-                <div class="col d-flex d-sm-flex d-lg-flex flex-column " style="padding: 12px;">
-                    <div class="form-group">
-                        <input class="form-control btn btn-primary" type="submit" value="Add trip"/>
-                    </div>
-                </div>
                 </form>
                 <section>
                     <hr>
@@ -52,3 +51,17 @@
             </div>
         </div>
 </div>
+
+<script>
+    function SetState(){
+        let TransportCode = document.getElementById("ModeOfTransport").value;
+
+        if(TransportCode == 20 || TransportCode == 0 || TransportCode == 6 || TransportCode == 182){
+            document.getElementById("PeopleInput").readOnly = true;
+        }
+        else{
+            document.getElementById("PeopleInput").readOnly = false;
+        }
+    }
+
+</script>
