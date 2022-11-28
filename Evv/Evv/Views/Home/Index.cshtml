@@ -21,13 +21,13 @@
                             <input asp-for="DateCreated" class="form-control" lang="en" type="date" />
                         </div>
                         <div class="form-group">
-                            <label asp-for="People" class="control-label">People</label>
+                            <label asp-for="People" class="control-label" id="PeopleText">People</label>
                             <input asp-for="People" type="number" class="form-control" placeholder="Enter amount of people" value="1" id="PeopleInput"/>
                         </div>
                     </div>
                     <div class="col-lg-5" style="padding: 12px;">
                         <div class="form-group">
-                            <label class="control-label">Means of transport</label>
+                            <label class="control-label">Means of transport*</label>
                             @Html.DropDownList(nameof(Model.Vehicle_Modifier), Model.VehicleModifierSelectList, new { @class = "form-control", @onchange = "SetState()", @id = "ModeOfTransport"})
                         </div>
                                 <div class="form-group">
@@ -57,10 +57,13 @@
         let TransportCode = document.getElementById("ModeOfTransport").value;
 
         if(TransportCode == 20 || TransportCode == 0 || TransportCode == 6 || TransportCode == 182){
-            document.getElementById("PeopleInput").readOnly = true;
+            document.getElementById("PeopleInput").hidden = true;
+            document.getElementById("PeopleText").hidden = true;
+            document.getElementById("PeopleInput").value = 1;
         }
         else{
-            document.getElementById("PeopleInput").readOnly = false;
+            document.getElementById("PeopleInput").hidden = false;
+            document.getElementById("PeopleText").hidden = false;
         }
     }
 
