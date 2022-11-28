@@ -12,6 +12,8 @@ namespace Evv.Database
     public class DatabaseClass
     {
         private string ConnectionString = "Data Source=cgievv.database.windows.net;Initial Catalog=FHICT-EVV;Persist Security Info=True;User ID=login;Password=CGIevv123";
+
+        private double totalscores;
         public void AddTrip(double score, double lenght, DateTime dag, string accountId, string transport)
         {
             string Query = "INSERT INTO [dbo].[Trip]([Date],[Score],[acountId],[Distance],[Transport])VALUES(@date,@score,@acountId,@distance,@transport)";
@@ -126,7 +128,7 @@ namespace Evv.Database
         public List<Trip> GetTrips(string userId)
         {
             List<Trip> ListWithTrips = new();
-            
+
             string Query = "SELECT * FROM Trip WHERE acountId = @userId";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
@@ -141,7 +143,7 @@ namespace Evv.Database
                     while (reader.Read())
                     {
 
-                        Trip trip = new Trip(Convert.ToDouble(reader["Distance"]), reader["Transport"].ToString() ,Convert.ToDateTime(reader["Date"]));
+                        Trip trip = new Trip(Convert.ToDouble(reader["Distance"]), reader["Transport"].ToString(), Convert.ToDateTime(reader["Date"]), Convert.ToDouble(reader["Score"]));
                         ListWithTrips.Add(trip);
                     }
 
@@ -152,7 +154,30 @@ namespace Evv.Database
             return ListWithTrips;
         }
 
+        public double TotalScore(string userId)
+        {
+            string Query = "SELECT Score FROM Trip WHERE acountId = @userId";
 
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                SqlCommand comm = new SqlCommand(Query, conn);
+                comm.Parameters.AddWithValue("@userId", userId);
 
+                conn.Open();
+
+                using (SqlDataReader reader = comm.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        totalscores += Convert.ToDouble(reader["Score"]);
+                        //double test = Convert.ToDouble(reader["Score"];
+                        //totalscores =+ test;
+                    }
+
+                    conn.Close();
+                }
+            }
+            return totalscores;
+        }
     }
 }

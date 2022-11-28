@@ -26,7 +26,7 @@ namespace Evv.Classes
 
         // Spare
         [Description("Public transport")]
-        Public_Transport = 20,
+        Public_transport = 20,
         [Description("Walk/bike")]
         Walk_Bike = 0,
         [Description("Bike - Electric")]

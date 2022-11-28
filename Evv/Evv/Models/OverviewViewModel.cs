@@ -6,6 +6,7 @@ namespace Evv.Models
     {
         //Date, Penalty Points (Score), Distance, Transport
         public List<Trip> trips { get; set; }
-        
+        public string Id { get; set; }
+        public double totalscore { get; set; }
     }
 }

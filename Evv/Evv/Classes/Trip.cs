@@ -28,11 +28,12 @@ namespace Evv.Classes
                 database.AddTrip(Score, Distance, DateCreated, accountId, Vehicle_Type.ToString());
             }
         }
-        public Trip(double distance, string vehicle_Modifier, DateTime datecreated)
+        public Trip(double distance, string vehicle_Modifier, DateTime datecreated, double score)
         {
             Distance = distance;
             Vehicle = vehicle_Modifier;
             DateCreated = datecreated;
+            Score = score;
         }
 
         public double CalculateScore()

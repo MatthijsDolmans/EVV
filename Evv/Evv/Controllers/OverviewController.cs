@@ -12,7 +12,9 @@ namespace Evv.Controllers
             string userid = HttpContext.Session.GetString("UserId");
             DatabaseClass databaseClass = new DatabaseClass();
             viewModel.trips =  databaseClass.GetTrips(userid);
+            viewModel.totalscore = databaseClass.TotalScore(userid);
             return View(viewModel);
         }
+
     }
 }

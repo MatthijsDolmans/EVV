@@ -70,7 +70,6 @@ namespace Evv.Controllers
         public IActionResult PersonalData(string id, string firstname, string lastname)
         {
             DatabaseClass databaseClass = new DatabaseClass();
-            string userId = HttpContext.Session.GetString("UserId");
             
             if(databaseClass.UpdateUser(firstname, lastname, id) < 1)
             {

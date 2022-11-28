@@ -24,7 +24,7 @@
                         <div class="text-md-end dataTables_filter" id="dataTable_filter"><label class="form-label"><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
                     </div>
                 <div>
-                    <p>Total amount of penalty points: 1425</p>
+                    <p>Total amount of penalty points: @Model.totalscore</p>
                 </div>
                 </div>
                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
@@ -41,10 +41,10 @@
                         {
                             <tbody>
                                 <tr>
-                                    <td>@trip.DateCreated</td>
-                                    <td>@trip.Vehicle</td>
+                                    <td>@trip.DateCreated.ToString("dd/MM/yyyy")</td>
+                                    <td>@trip.Vehicle.Replace("_"," ")</td>
                                     <td>@trip.Distance</td>
-                                    <td>0</td>
+                                    <td>@trip.Score</td>
                                 </tr>
                             </tbody>
                         }
