@@ -18,14 +18,14 @@
                                     <option value="25">25</option>
                                     <option value="50">50</option>
                                     <option value="100">100</option>
-                                </select>&nbsp;</label></div>
-                    </div>
+                                </select>&nbsp;</label>
+                        </div>
                     <div class="col-md-6">
                         <div style="opacity: 0;" class="text-md-end dataTables_filter" id="dataTable_filter"><label class="form-label"><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
                     </div>
-                <div>
-                    <p>Total amount of penalty points: @Model.totalscore.ToString("#.##")</p>
                 </div>
+                <div class="col-md-6 text-nowrap"> 
+                    <h4>Total amount of penalty points: @Model.totalscore.ToString("#.##")</h4>
                 </div>
                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                     <table class="table my-0" id="dataTable">
