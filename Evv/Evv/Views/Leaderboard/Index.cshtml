@@ -14,7 +14,9 @@
 			<br>
 
 			<div class="row">
-				<div class="col-sm-4">
+				@if (Model.top3.Count() >= 2)
+			   {
+				   <div class="col-sm-4">
 					<div class="leaderboard-card leaderboard-card--Second">
 						<div class="leaderboard-card__top">
 							<h3 class="text-center">2nd!</h3>
@@ -33,7 +35,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-4">
+			   }
+				@if (Model.top3.Count() >= 1)
+				{
+					<div class="col-sm-4">
 					<div class="leaderboard-card leaderboard-card--first">
 						<div class="leaderboard-card__top">
 							<h3 class="text-center">1st!</h3>
@@ -52,7 +57,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-4">
+				}
+				@if (Model.top3.Count() >= 3)
+				{
+					<div class="col-sm-4">
 					<div class="leaderboard-card leaderboard-card--Third">
 						<div class="leaderboard-card__top">
 							<h3 class="text-center">3rd!</h3>
@@ -71,14 +79,16 @@
 						</div>
 					</div>
 				</div>
+				}
+				
 			</div>
 			<h4>All Users</h4>
 
 			<table class="table">
 				<thead>
 					<tr>
-						<th>User</th>
-						<th>Penalty points</th>
+						<th style="text-align: left">User</th>
+						<th style="padding-right: 10px">Penalty points</th>
 						<th>Function</th>
 						<th>Amount of trips</th>
 					</tr>

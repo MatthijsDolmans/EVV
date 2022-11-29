@@ -185,7 +185,7 @@ namespace Evv.Database
             List<Person> list = new List<Person>();
             list.Add(new Person());
 
-            string Query = "SELECT Account.id, Account.first_name, Account.last_name, Trip.Score FROM Account INNER JOIN Trip ON Account.id = Trip.acountId";
+            string Query = "SELECT Account.id, Account.first_name, Account.last_name, Trip.Score, Trip.distance FROM Account INNER JOIN Trip ON Account.id = Trip.acountId";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -204,6 +204,7 @@ namespace Evv.Database
                             list[i].firstname = reader.GetString(1);
                             list[i].lastname = reader.GetString(2);
                             list[i].points = Decimal.ToDouble(reader.GetDecimal(3));
+                            list[i].distance = Decimal.ToDouble(reader.GetDecimal(4));
                             list[i].tripAmount++;
                         }
                         else
@@ -211,6 +212,7 @@ namespace Evv.Database
                             if (list[i].firstname == reader.GetString(1))
                             {
                                 list[i].points += Decimal.ToDouble(reader.GetDecimal(3));
+                                list[i].distance += Decimal.ToDouble(reader.GetDecimal(4));
                                 list[i].tripAmount++;
                             }
                             else
@@ -220,6 +222,7 @@ namespace Evv.Database
                                 list[i].firstname = reader.GetString(1);
                                 list[i].lastname = reader.GetString(2);
                                 list[i].points = Decimal.ToDouble(reader.GetDecimal(3));
+                                list[i].distance = Decimal.ToDouble(reader.GetDecimal(4));
                                 list[i].tripAmount++;
 
                             }
