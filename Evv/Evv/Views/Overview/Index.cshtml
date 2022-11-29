@@ -1,6 +1,50 @@
 ﻿@model OverviewViewModel
 @{
     ViewData["Title"] = "Home Page";
+
+    //bool count = true;
+    if (!string.IsNullOrEmpty(Model.button))
+    {
+        if (Context.Session.GetInt32("count") == 0)
+        {
+            switch (Model.button)
+            {
+                case "Date":
+                    Model.trips = Model.trips.OrderByDescending(o => o.DateCreated).ToList();
+                    break;
+
+                case "Distance":
+                    Model.trips = Model.trips.OrderByDescending(o => o.Distance).ToList();
+                    break;
+
+                case "PenaltyPoints":
+                    Model.trips = Model.trips.OrderByDescending(o => o.Score).ToList();
+                    break;
+            }
+            Context.Session.SetInt32("count", 1);
+        }
+        else
+        {
+            switch (Model.button)
+            {
+                case "Date":
+                    Model.trips = Model.trips.OrderBy(o => o.DateCreated).ToList();
+                    break;
+
+                case "Distance":
+                    Model.trips = Model.trips.OrderBy(o => o.Distance).ToList();
+                    break;
+
+                case "PenaltyPoints":
+                    Model.trips = Model.trips.OrderBy(o => o.Score).ToList();
+                    break;
+            }
+            Context.Session.SetInt32("count", 0);
+        }
+
+
+        //Model.trips = Model.trips.OrderByDescending(o => o.DateCreated).ToList();
+    }
 }
 
 
@@ -31,10 +75,12 @@
                     <table class="table my-0" id="dataTable">
                         <thead>
                             <tr>
-                                <th>Date</th>
+                                <form method="post">
+                                <th><button name="button" value="Date">Date</button></th>
                                 <th>Means of transport</th>
-                                <th>Distance</th>
-                                <th>Penalty points</th>
+                                <th><button name="button" value="Distance">Distance</button></th>
+                                <th><button name="button" value="PenaltyPoints">Penalty points</button></th>
+                                </form>
                             </tr>
                         </thead>
                         @foreach(var trip in Model.trips)

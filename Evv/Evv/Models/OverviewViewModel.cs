@@ -8,5 +8,8 @@ namespace Evv.Models
         public List<Trip> trips { get; set; }
         public string Id { get; set; }
         public double totalscore { get; set; }
+
+        public string button { get; set; }
+
     }
 }
