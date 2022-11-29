@@ -13,6 +13,10 @@
                     Model.trips = Model.trips.OrderByDescending(o => o.DateCreated).ToList();
                     break;
 
+            case "Vehicle":
+                    Model.trips = Model.trips.OrderByDescending(o => o.Vehicle).ToList();
+                    break;
+
                 case "Distance":
                     Model.trips = Model.trips.OrderByDescending(o => o.Distance).ToList();
                     break;
@@ -29,6 +33,10 @@
             {
                 case "Date":
                     Model.trips = Model.trips.OrderBy(o => o.DateCreated).ToList();
+                    break;
+
+            case "Vehicle":
+                    Model.trips = Model.trips.OrderBy(o => o.Vehicle).ToList();
                     break;
 
                 case "Distance":
@@ -72,14 +80,15 @@
                     <h4>Total amount of penalty points: @Model.totalscore.ToString("#.##")</h4>
                 </div>
                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                    <center>
                     <table class="table my-0" id="dataTable">
                         <thead>
                             <tr>
                                 <form method="post">
-                                <th><button name="button" value="Date">Date</button></th>
-                                <th>Means of transport</th>
-                                <th><button name="button" value="Distance">Distance</button></th>
-                                <th><button name="button" value="PenaltyPoints">Penalty points</button></th>
+                                <th><button class="btn" name="button" value="Date"><strong>Date</strong></button></th>
+                                <th><button class="btn" name="button" value="Vehicle"><strong>Means of transport</strong></button></th>
+                                <th><button class="btn" name="button" value="Distance"><strong>Distance</strong></button></th>
+                                <th><button class="btn" name="button" value="PenaltyPoints"><strong>Penalty points</strong></button></th>
                                 </form>
                             </tr>
                         </thead>
@@ -104,6 +113,7 @@
                             </tr>
                         </tfoot>
                     </table>
+                    </center>
                 </div>
                 <div class="row">
                     <div class="col-md-6 align-self-center">
