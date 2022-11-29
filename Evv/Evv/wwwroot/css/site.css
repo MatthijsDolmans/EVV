@@ -17,14 +17,15 @@ body {
   margin-bottom: 60px;
 }
 
-.btn {
-    background: none;
+.btnSort {
+    background-color: white;
+    color: #858796;
     border: none;
-    margin: 0;
-    padding: 0;
+    padding: 0 !important;
     cursor: pointer;
-}
+    text-align: left;
+}x`
 
-.btn:hover{
+.btnSort:hover{
     border: none;
 }
