@@ -124,5 +124,56 @@ namespace Evv.Database
             return count + 1;
         }
 
+        public List<Person> GetAllPeople()
+        {
+            List<Person> list = new List<Person>();
+            list.Add(new Person());
+
+            string Query = "SELECT Account.id, Account.first_name, Account.last_name, Trip.Score FROM Account INNER JOIN Trip ON Account.id = Trip.acountId";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                SqlCommand comm = new SqlCommand(Query, conn);
+
+                conn.Open();
+
+                using (SqlDataReader reader = comm.ExecuteReader())
+                {
+                    int i = 0;
+
+                    while (reader.Read())
+                    {
+                        if(list[i].firstname == ""){
+                            list[i].firstname = reader.GetString(1);
+                            list[i].lastname = reader.GetString(2);
+                            list[i].points = Decimal.ToDouble(reader.GetDecimal(3)); 
+                            list[i].tripAmount ++;
+                        }
+                        else
+                        { 
+                            if(list[i].firstname == reader.GetString(1)){
+                                list[i].points += Decimal.ToDouble(reader.GetDecimal(3));
+                                list[i].tripAmount++;
+                            }
+                            else
+                            {
+                                list.Add(new Person());
+                                i++;
+                                list[i].firstname = reader.GetString(1);
+                                list[i].lastname = reader.GetString(2);
+                                list[i].points = Decimal.ToDouble(reader.GetDecimal(3));
+                                list[i].tripAmount++;
+
+                            }
+                        }
+                    }
+
+                    conn.Close();
+                }
+            }
+
+            return list;
+        }
+
     }
 }

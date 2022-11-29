@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Evv.Classes;
+using Evv.Database;
+using Evv.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Evv.Controllers
 {
@@ -7,7 +10,30 @@ namespace Evv.Controllers
         public IActionResult Index()
         {
             ViewBag.page = "Leaderboard";
-            return View();
+
+            DatabaseClass databaseclass = new DatabaseClass();
+            LeaderboardViewModel view = new LeaderboardViewModel();
+            
+            List<Person> people = databaseclass.GetAllPeople();
+
+            foreach (Person person in people)
+			{
+                person.points = Math.Round(person.points, 2);
+			}
+
+            List<Person> orderedPeople = people.OrderBy(p => p.points).ThenBy(p => p.tripAmount).ToList();
+
+            view.top3 = new List<Person>();
+            for (int i = 0; i < 3; i++)
+			{
+                view.top3.Add(orderedPeople[i]);
+			}
+
+            orderedPeople.RemoveRange(0, 3);
+
+            view.people = orderedPeople;
+
+            return View(view);
         }
     }
 }
