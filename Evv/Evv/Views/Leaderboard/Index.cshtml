@@ -1,4 +1,6 @@
-﻿@{
+﻿@model LeaderboardViewModel
+
+@{
 
     ViewData["Title"] = "Home Page";
 }
@@ -12,7 +14,10 @@
 			<br>
 
 			<div class="row">
-				<div class="col-sm-4">
+				@{string km = "KM";}
+				@if (Model.top3.Count() >= 2)
+			   {
+				   <div class="col-sm-4">
 					<div class="leaderboard-card leaderboard-card--Second">
 						<div class="leaderboard-card__top">
 							<h3 class="text-center">2nd!</h3>
@@ -20,18 +25,21 @@
 						<div class="leaderboard-card__body">
 							<div class="text-center">
 								<img src="~/scoreboard/img/user1.jpg" class="circle-img mb-2" alt="User Img">
-								<h5 class="mb-0">Harry</h5>
-								<p class="text-muted mb-0">500 Penalty points</p>
+								<h5 class="mb-0">@($"{Model.top3[1].firstname} {Model.top3[1].lastname}")</h5>
+								<p class="text-muted mb-0">@Model.top3[1].points Penalty points</p>
 								<hr>
 								<div class="d-flex justify-content-between align-items-center">
-									<span>Most used mode of transport: </span>
-									<span>Bike</span>
+									<span>Distance Traveled: </span>
+									<span>@($"{@Model.top3[1].distance} {@km}")</span>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-4">
+			   }
+				@if (Model.top3.Count() >= 1)
+				{
+					<div class="col-sm-4">
 					<div class="leaderboard-card leaderboard-card--first">
 						<div class="leaderboard-card__top">
 							<h3 class="text-center">1st!</h3>
@@ -39,18 +47,21 @@
 						<div class="leaderboard-card__body">
 							<div class="text-center">
 								<img src="~/scoreboard/img/user2.jpg" class="circle-img mb-2" alt="User Img">
-								<h5 class="mb-0">Bats</h5>
-								<p class="text-muted mb-0">1000 Penalty points</p>
+								<h5 class="mb-0">@($"{Model.top3[0].firstname} {Model.top3[0].lastname}")</h5>
+								<p class="text-muted mb-0">@Model.top3[0].points Penalty points</p>
 								<hr>
 								<div class="d-flex justify-content-between align-items-center">
-									<span>Most used mode of transport: </span>
-									<span>Plane</span>
+									<span>Distance Traveled: </span>
+									<span>@($"{@Model.top3[0].distance} {@km}")</span>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-4">
+				}
+				@if (Model.top3.Count() >= 3)
+				{
+					<div class="col-sm-4">
 					<div class="leaderboard-card leaderboard-card--Third">
 						<div class="leaderboard-card__top">
 							<h3 class="text-center">3rd!</h3>
@@ -58,50 +69,51 @@
 						<div class="leaderboard-card__body">
 							<div class="text-center">
 								<img src="~/scoreboard/img/user3.jpg" class="circle-img mb-2" alt="User Img">
-								<h5 class="mb-0">Bak</h5>
-								<p class="text-muted mb-0">200 Penalty points</p>
+								<h5 class="mb-0">@($"{Model.top3[2].firstname} {Model.top3[2].lastname}")</h5>
+								<p class="text-muted mb-0">@Model.top3[2].points Penalty points</p>
 								<hr>
 								<div class="d-flex justify-content-between align-items-center">
-									<span>Most used mode of transport: </span>
-									<span>Train</span>
+									<span>Distance Traveled: </span>
+									<span>@($"{@Model.top3[2].distance} {@km}")</span>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+				}
+				
 			</div>
-
-
 			<h4>All Users</h4>
-
 			<table class="table">
 				<thead>
 					<tr>
-						<th>User</th>
-						<th>Penalty points</th>
-						<th>Function</th>
-						<th>Mode of transport</th>
+						<th style="text-align: left;">User</th>
+						<th style="text-align: center">Penalty points</th>
+						<th>Amount of trips</th>
+						<th>Distance Traveled (KM)</th>
 					</tr>
 				</thead>
 				<tbody>
+					@{int counter = 4;}
+					@foreach (var item in Model.people)
+				   {
 					<tr>
 						<td>
 							<div class="d-flex align-items-center">
 								<img src="~/scoreboard/img/user4.jpg" class="circle-img circle-img--small mr-2" alt="User Img">
 								<div class="user-info__basic">
-									<h5 class="mb-0">sumin</h5>
-									<p class="text-muted mb-0">Place: 5th</p>
+									<h5 class="mb-0">@($"{item.firstname} {item.lastname}")</h5>
+									<p class="text-muted mb-0">Place: @counter</p>
 								</div>
 							</div>
 						</td>
-						<td>
-							<div class="d-flex align-items-baseline">
-								<h4 class="mr-1">100</h4>
-							</div>
-						</td>
-						<td>CEO</td>
-						<td>Bike</td>
-					</tr>
+						<td>@item.points</td>
+						<td>@item.tripAmount</td>
+						<td>@item.distance</td>
+					</tr>   
+					counter = counter + 1;
+				   }
+					
 				</tbody>
 			</table>
 		</div>

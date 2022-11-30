@@ -16,3 +16,16 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.btnSort {
+    background-color: white;
+    color: #858796;
+    border: none;
+    padding: 0 !important;
+    cursor: pointer;
+    text-align: left;
+}x`
+
+.btnSort:hover{
+    border: none;
+}

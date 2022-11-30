@@ -1,6 +1,58 @@
 ﻿@model OverviewViewModel
 @{
     ViewData["Title"] = "Home Page";
+
+    //bool count = true;
+    if (!string.IsNullOrEmpty(Model.button))
+    {
+        if (Context.Session.GetInt32("count") == 0)
+        {
+            switch (Model.button)
+            {
+                case "Date":
+                    Model.trips = Model.trips.OrderByDescending(o => o.DateCreated).ToList();
+                    break;
+
+            case "Vehicle":
+                    Model.trips = Model.trips.OrderByDescending(o => o.Vehicle).ToList();
+                    break;
+
+                case "Distance":
+                    Model.trips = Model.trips.OrderByDescending(o => o.Distance).ToList();
+                    break;
+
+                case "PenaltyPoints":
+                    Model.trips = Model.trips.OrderByDescending(o => o.Score).ToList();
+                    break;
+            }
+            Context.Session.SetInt32("count", 1);
+        }
+        else
+        {
+            switch (Model.button)
+            {
+                case "Date":
+                    Model.trips = Model.trips.OrderBy(o => o.DateCreated).ToList();
+                    break;
+
+            case "Vehicle":
+                    Model.trips = Model.trips.OrderBy(o => o.Vehicle).ToList();
+                    break;
+
+                case "Distance":
+                    Model.trips = Model.trips.OrderBy(o => o.Distance).ToList();
+                    break;
+
+                case "PenaltyPoints":
+                    Model.trips = Model.trips.OrderBy(o => o.Score).ToList();
+                    break;
+            }
+            Context.Session.SetInt32("count", 0);
+        }
+
+
+        //Model.trips = Model.trips.OrderByDescending(o => o.DateCreated).ToList();
+    }
 }
 
 
@@ -28,13 +80,16 @@
                     <h4>Total amount of penalty points: @Model.totalscore.ToString("#.##")</h4>
                 </div>
                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                    <center>
                     <table class="table my-0" id="dataTable">
                         <thead>
                             <tr>
-                                <th>Date</th>
-                                <th>Means of transport</th>
-                                <th>Distance</th>
-                                <th>Penalty points</th>
+                                <form method="post">
+                                    <th><button class="btnSort" name="button" value="Date"><strong>Date</strong></button></th>
+                                    <th><button class="btnSort" name="button" value="Vehicle"><strong>Means of transport</strong></button></th>
+                                    <th><button class="btnSort" name="button" value="Distance"><strong>Distance</strong></button></th>
+                                    <th><center><button class="btnSort" name="button" value="PenaltyPoints"><strong>Penalty points</strong></button></center></th>
+                                </form>
                             </tr>
                         </thead>
                         @foreach(var trip in Model.trips)
@@ -58,6 +113,7 @@
                             </tr>
                         </tfoot>
                     </table>
+                    </center>
                 </div>
                 <div class="row">
                     <div class="col-md-6 align-self-center">
