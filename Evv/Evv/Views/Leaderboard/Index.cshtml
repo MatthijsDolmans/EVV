@@ -14,6 +14,7 @@
 			<br>
 
 			<div class="row">
+				@{string km = "KM";}
 				@if (Model.top3.Count() >= 2)
 			   {
 				   <div class="col-sm-4">
@@ -27,9 +28,9 @@
 								<h5 class="mb-0">@($"{Model.top3[1].firstname} {Model.top3[1].lastname}")</h5>
 								<p class="text-muted mb-0">@Model.top3[1].points Penalty points</p>
 								<hr>
-								<div class="d-flex justify-cvontent-between align-items-center">
-									<span>Amount of trips: </span>
-									<span>@Model.top3[1].tripAmount</span>
+								<div class="d-flex justify-content-between align-items-center">
+									<span>Distance Traveled: </span>
+									<span>@($"{@Model.top3[1].distance} {@km}")</span>
 								</div>
 							</div>
 						</div>
@@ -50,8 +51,8 @@
 								<p class="text-muted mb-0">@Model.top3[0].points Penalty points</p>
 								<hr>
 								<div class="d-flex justify-content-between align-items-center">
-									<span>Amount of trips: </span>
-									<span>@Model.top3[0].tripAmount</span>
+									<span>Distance Traveled: </span>
+									<span>@($"{@Model.top3[0].distance} {@km}")</span>
 								</div>
 							</div>
 						</div>
@@ -72,8 +73,8 @@
 								<p class="text-muted mb-0">@Model.top3[2].points Penalty points</p>
 								<hr>
 								<div class="d-flex justify-content-between align-items-center">
-									<span>Amount of trips: </span>
-									<span>@Model.top3[2].tripAmount</span>
+									<span>Distance Traveled: </span>
+									<span>@($"{@Model.top3[2].distance} {@km}")</span>
 								</div>
 							</div>
 						</div>
@@ -83,14 +84,13 @@
 				
 			</div>
 			<h4>All Users</h4>
-
 			<table class="table">
 				<thead>
 					<tr>
-						<th style="text-align: left">User</th>
-						<th style="padding-right: 10px">Penalty points</th>
-						<th>Function</th>
+						<th style="text-align: left;">User</th>
+						<th style="text-align: center">Penalty points</th>
 						<th>Amount of trips</th>
+						<th>Distance Traveled (KM)</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -107,13 +107,9 @@
 								</div>
 							</div>
 						</td>
-						<td>
-							<div class="d-flex align-items-baseline">
-								<h4 class="mr-1">@item.points</h4>
-							</div>
-						</td>
-						<td>CEO</td>
+						<td>@item.points</td>
 						<td>@item.tripAmount</td>
+						<td>@item.distance</td>
 					</tr>   
 					counter = counter + 1;
 				   }

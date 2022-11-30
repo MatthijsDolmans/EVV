@@ -21,7 +21,7 @@ namespace Evv.Controllers
                 person.points = Math.Round(person.points, 2);
 			}
 
-            List<Person> orderedPeople = people.OrderBy(p => p.points).ThenBy(p => p.distance).ThenByDescending(p => p.tripAmount).ToList();
+            List<Person> orderedPeople = people.OrderBy(p => p.points).ThenByDescending(p => p.distance).ThenByDescending(p => p.tripAmount).ToList();
             if(orderedPeople.Count <= 3 && orderedPeople.Count != 0)
 			{
                 view.top3 = new List<Person>();
