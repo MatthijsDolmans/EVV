@@ -185,7 +185,7 @@ namespace Evv.Database
             List<Person> list = new List<Person>();
             list.Add(new Person());
 
-            string Query = "SELECT Account.id, Account.first_name, Account.last_name, Trip.Score, Trip.distance FROM Account INNER JOIN Trip ON Account.id = Trip.acountId";
+            string Query = "SELECT Account.id, Account.first_name, Account.last_name, Trip.Score, Trip.distance FROM Account INNER JOIN Trip ON Account.id = Trip.acountId ORDER BY Account.id";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
