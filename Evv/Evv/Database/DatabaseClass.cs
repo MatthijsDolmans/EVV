@@ -173,11 +173,10 @@ namespace Evv.Database
                         //double test = Convert.ToDouble(reader["Score"];
                         //totalscores =+ test;
                     }
-
                     conn.Close();
                 }
             }
-            return totalscores;
+            return Math.Round(totalscores,2);
         }
 
         public List<Person> GetAllPeople()
