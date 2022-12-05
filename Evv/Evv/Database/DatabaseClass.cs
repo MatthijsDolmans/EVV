@@ -224,7 +224,6 @@ namespace Evv.Database
                                 list[i].points = Decimal.ToDouble(reader.GetDecimal(3));
                                 list[i].distance = Decimal.ToDouble(reader.GetDecimal(4));
                                 list[i].tripAmount++;
-
                             }
                         }
                     }

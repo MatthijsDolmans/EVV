@@ -19,7 +19,8 @@ namespace Evv.Controllers
             foreach (Person person in people)
 			{
                 person.points = Math.Round(person.points, 2);
-			}
+                person.distance = Math.Round(person.distance, 2);
+            }
 
             List<Person> orderedPeople = people.OrderBy(p => p.points).ThenByDescending(p => p.distance).ThenByDescending(p => p.tripAmount).ToList();
             if(orderedPeople.Count <= 3 && orderedPeople.Count != 0)
