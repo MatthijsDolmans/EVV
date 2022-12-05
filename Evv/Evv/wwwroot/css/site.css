@@ -14,7 +14,7 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  
 }
 
 .btnSort {
@@ -24,7 +24,7 @@ body {
     padding: 0 !important;
     cursor: pointer;
     text-align: left;
-}x`
+}
 
 .btnSort:hover{
     border: none;
