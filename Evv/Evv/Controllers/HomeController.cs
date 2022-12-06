@@ -49,6 +49,7 @@ namespace Evv.Controllers
             }
             else
             {
+                viewModel.DateCreated = DateTime.Now;
                 return View(viewModel);
             }
         }

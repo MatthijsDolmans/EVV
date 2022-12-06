@@ -18,7 +18,7 @@
                     <div class="col-lg-5" style="padding: 12px;margin-left: auto; margin-right:auto;">
                         <div class="form-group">
                             <label asp-for="DateCreated" class="control-label">Date</label>
-                            <input asp-for="DateCreated" class="form-control" lang="en" type="date" />
+                            <input asp-for="DateCreated" class="form-control" lang="en" type="date" id="date"/>
                         </div>
                         <div class="form-group">
                             <label asp-for="People" class="control-label" id="PeopleText">People</label>
@@ -32,7 +32,7 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="Distance" class="control-label">Distance (KM)</label>
-                            <input asp-for="Distance" class="form-control" id="distance" type="text" placeholder="Enter distance"/>
+                            <input asp-for="Distance" class="form-control" id="distance" type="number" placeholder="Enter distance"/>
                         </div>
                     </div>
 
@@ -70,11 +70,36 @@
     }
 
     function notify(){
-        if( document.getElementById("distance").value == "0" ||  document.getElementById("PeopleInput").value == ""){
-            alert("Vul een afstand in hoger dan 0.");
+        let check = false;
+        let check2 = false;
+
+        if( parseInt(document.getElementById("distance").value) < 1 ||  document.getElementById("distance").value == ""){
+            alert("Your distance needs to be higher then 0.");
+
+            check = false
         }
         else{
-            alert("Uw rijs is opgeslagen.");
+            check = true;
+        }
+
+        if(parseInt(document.getElementById("PeopleInput").value) < 1 ||  document.getElementById("PeopleInput").value == ""){
+            alert("The amount of people you travel with needs to be more then 0.");
+            check2 = false
+        }
+        else{
+            check2 = true;
+        }
+
+        if(document.getElementById("date").value == ""){
+            alert("Fill in a valid date");
+            check3 = false
+        }
+        else{
+            check3 = true
+        }
+            
+        if(check == true && check2 == true && check3 == true){
+            alert("Your trip has been added");
         }
     }
 </script>
