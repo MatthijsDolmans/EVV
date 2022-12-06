@@ -32,7 +32,7 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="Distance" class="control-label">Distance (KM)</label>
-                            <input asp-for="Distance" class="form-control" type="text" placeholder="Enter distance" />
+                            <input asp-for="Distance" class="form-control" id="distance" type="text" placeholder="Enter distance"/>
                         </div>
                     </div>
 
@@ -42,7 +42,7 @@
                         </div>
                         </div>*@
                 </div>
-                <input class="form-control btn btn-primary" type="submit" value="Add trip" style="margin-left: auto; margin-right:auto;" />
+                <input class="form-control btn btn-primary" type="submit" value="Add trip" style="margin-left: auto; margin-right:auto;" onclick="notify()"/>
             </form>
             @*                <section>
                 <hr>
@@ -69,4 +69,12 @@
         }
     }
 
+    function notify(){
+        if( document.getElementById("distance").value == "0" ||  document.getElementById("PeopleInput").value == ""){
+            alert("Vul een afstand in hoger dan 0.");
+        }
+        else{
+            alert("Uw rijs is opgeslagen.");
+        }
+    }
 </script>
