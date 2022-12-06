@@ -22,7 +22,7 @@ namespace Evv.Classes
             DefaultPeople();
             DateCreated = datecreated;
             Score = CalculateScore();
-            if (Score != null && Distance != null && DateCreated != null && accountId != null && Distance != 0)
+            if (Score != null && Distance != null && DateCreated != null && accountId != null && Distance > 0)
             {
                 Console.WriteLine(accountId);
                 database.AddTrip(Score, Distance, DateCreated, accountId, Vehicle_Type.ToString());
