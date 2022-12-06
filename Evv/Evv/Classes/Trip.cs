@@ -19,10 +19,9 @@ namespace Evv.Classes
             Distance = distance;
             Vehicle_Type = vehicle_Modifier;
             People = people;
-            DefaultPeople();
             DateCreated = datecreated;
             Score = CalculateScore();
-            if (Score != null && Distance != null && DateCreated != null && accountId != null && Distance > 0)
+            if (Score != null && Distance != null && DateCreated != null && accountId != null && Distance > 0 && People > 0)
             {
                 Console.WriteLine(accountId);
                 database.AddTrip(Score, Distance, DateCreated, accountId, Vehicle_Type.ToString());
@@ -51,17 +50,7 @@ namespace Evv.Classes
         {
             return Distance;
         }
-        public int DefaultPeople()
-        {
-            if (People <= 0)
-            {
-                return People = 1;
-            }
-            else
-            {
-                return People;
-            }
-        }
+
         public DateTime GetDate()
         {
             return DateCreated;
