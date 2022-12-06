@@ -13,7 +13,7 @@
                     Model.trips = Model.trips.OrderByDescending(o => o.DateCreated).ToList();
                     break;
 
-            case "Vehicle":
+                case "Vehicle":
                     Model.trips = Model.trips.OrderByDescending(o => o.Vehicle).ToList();
                     break;
 
@@ -35,7 +35,7 @@
                     Model.trips = Model.trips.OrderBy(o => o.DateCreated).ToList();
                     break;
 
-            case "Vehicle":
+                case "Vehicle":
                     Model.trips = Model.trips.OrderBy(o => o.Vehicle).ToList();
                     break;
 
@@ -49,9 +49,10 @@
             }
             Context.Session.SetInt32("count", 0);
         }
-
-
-        //Model.trips = Model.trips.OrderByDescending(o => o.DateCreated).ToList();
+    }
+    else
+    {
+        Model.trips = Model.trips.OrderByDescending(o => o.DateCreated).ToList();
     }
 }
 
