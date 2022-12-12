@@ -39,21 +39,24 @@ namespace Evv.Classes
             People = GetPeople(distance, score, vehicle_Modifier);
         }
 
-        public int GetPeople(double distance, double points, string mod)
+        public int GetPeople(double distance, double points, string vehicleType)
         {
-            int Intmod = 0;
+            int intMod = 0;
             foreach (Vehicle_Modifier item in Enum.GetValues(typeof(Vehicle_Modifier))) 
             {
-                if(item.ToString() == mod)
+                if(item.ToString() == vehicleType)
                 {
-                    Intmod = Convert.ToInt32(item);
+                    intMod = Convert.ToInt32(item);
                 }
             }
 
-            double modi = points * (1000 / Intmod);
-            double Dpeople = distance / modi;
-            int people = Convert.ToInt32(Math.Round(Dpeople, 0));
-            return people;
+            return Convert.ToInt32(Math.Round(distance / (points * (1000 / intMod)), 0));
+
+            // x = Distance / (points ( 1000 / mod)
+            //double mod = points * (1000 / intMod);
+            //double dPeople = distance / mod;
+            //double ddPeople = (distance / (points * (1000 / intMod)));
+            //int people = Convert.ToInt32(Math.Round((distance / (points * (1000 / intMod))), 0));
         }
 
         public double CalculateScore()
