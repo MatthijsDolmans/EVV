@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Xml.Linq;
 
+
 namespace Evv.Classes
 {
     public class Trip
     {
+        public int Id { get; set; }
         public double Distance { get; private set; }
         public double Score { get; private set; }
         public int People { get; private set; } = 1;
@@ -27,12 +29,31 @@ namespace Evv.Classes
                 database.AddTrip(Score, Distance, DateCreated, accountId, Vehicle_Type.ToString());
             }
         }
-        public Trip(double distance, string vehicle_Modifier, DateTime datecreated, double score)
+        public Trip(int id, double distance, string vehicle_Modifier, DateTime datecreated, double score)
         {
+            Id = id;
             Distance = distance;
             Vehicle = vehicle_Modifier;
             DateCreated = datecreated;
             Score = score;
+            People = GetPeople(distance, score, vehicle_Modifier);
+        }
+
+        public int GetPeople(double distance, double points, string mod)
+        {
+            int Intmod = 0;
+            foreach (Vehicle_Modifier item in Enum.GetValues(typeof(Vehicle_Modifier))) 
+            {
+                if(item.ToString() == mod)
+                {
+                    Intmod = Convert.ToInt32(item);
+                }
+            }
+
+            double modi = points * (1000 / Intmod);
+            double Dpeople = distance / modi;
+            int people = Convert.ToInt32(Math.Round(Dpeople, 0));
+            return people;
         }
 
         public double CalculateScore()

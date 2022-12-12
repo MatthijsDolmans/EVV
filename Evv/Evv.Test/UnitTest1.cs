@@ -10,5 +10,12 @@ namespace Evv.Test
             Trip trip = new Trip(-20, Vehicle_Modifier.Motor, 1, DateTime.Now, "1");
             Assert.NotEqual(-20, trip.Distance);
         }
+
+        [Fact]
+        public void GetsPeopleFromDB()
+        {
+            Trip trip = new(2, 56.6, "Car_electric", DateTime.Now, 2.42);
+            Assert.Equal(2, trip.People);
+        }
     }
 }

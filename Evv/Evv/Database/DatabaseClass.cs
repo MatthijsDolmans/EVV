@@ -143,7 +143,7 @@ namespace Evv.Database
                     while (reader.Read())
                     {
 
-                        Trip trip = new Trip(Convert.ToDouble(reader["Distance"]), reader["Transport"].ToString(), Convert.ToDateTime(reader["Date"]), Convert.ToDouble(reader["Score"]));
+                        Trip trip = new Trip((int)reader["tripId"],Convert.ToDouble(reader["Distance"]), reader["Transport"].ToString(), Convert.ToDateTime(reader["Date"]), Convert.ToDouble(reader["Score"]));
                         ListWithTrips.Add(trip);
                     }
 

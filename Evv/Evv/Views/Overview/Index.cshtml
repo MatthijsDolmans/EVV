@@ -92,10 +92,13 @@
                         {
                             <tbody>
                                 <tr>
+                                    <td>@trip.Id</td>
                                     <td>@trip.DateCreated.ToString("dd/MM/yyyy")</td>
                                     <td>@trip.Vehicle.Replace("_"," ")</td>
                                     <td>@trip.Distance</td>
                                     <td>@trip.Score</td>
+                                    <td><button>Delete</button></td>
+                                    <td><button>Edit</button></td>
                                 </tr>
                             </tbody>
                         }
