@@ -14,8 +14,8 @@ namespace Evv.Test
         [Fact]
         public void GetsPeopleFromDB()
         {
-            Trip trip = new(2, 56.6, "Car_electric", DateTime.Now, 2.42);
-            Assert.Equal(2, trip.People);
+            Trip trip = new(2, 10000, "Scooter_electric", DateTime.Now, 76.67);
+            Assert.Equal(3, trip.People);
         }
     }
 }
