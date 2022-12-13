@@ -11,6 +11,8 @@ public class TripViewModel
     public double score { get; set; }
     public DateTime DateCreated { get; set; }
     public Vehicle_Modifier Vehicle_Modifier { get; set; }
+    public List<string>? FavoriteNames { get; set; }
+    public string? ChosenfavoriteName { get; set; }
     public string? FavoriteName { get; set; }
     public SelectList VehicleModifierSelectList {get        
         {

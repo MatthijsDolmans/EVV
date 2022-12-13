@@ -129,7 +129,7 @@ namespace Evv.Database
         {
             List<Trip> ListWithTrips = new();
 
-            string Query = "SELECT * FROM Trip WHERE acountId = @userId";
+            string Query = "SELECT * FROM Trip WHERE acountId = @userId and FavoriteName IS NULL";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -156,7 +156,7 @@ namespace Evv.Database
 
         public double TotalScore(string userId)
         {
-            string Query = "SELECT Score FROM Trip WHERE acountId = @userId";
+            string Query = "SELECT Score FROM Trip WHERE acountId = @userId and FavoriteName IS NULL ";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -184,7 +184,7 @@ namespace Evv.Database
             List<Person> list = new List<Person>();
             list.Add(new Person());
 
-            string Query = "SELECT Account.id, Account.first_name, Account.last_name, Trip.Score, Trip.distance FROM Account INNER JOIN Trip ON Account.id = Trip.acountId ORDER BY Account.id";
+            string Query = "SELECT Account.id, Account.first_name, Account.last_name, Trip.Score, Trip.distance FROM Account INNER JOIN Trip ON Account.id = Trip.acountId WHERE Trip.FavoriteName IS NULL ORDER BY Account.id ";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -250,9 +250,10 @@ namespace Evv.Database
             }
         }
 
-        public string GetFavoriteName(string userId)
+        public List<string> GetFavoriteName(string userId)
         {
             string Query = "SELECT FavoriteName FROM Favorites WHERE accountId = @userId";
+            List<string> Favorites = new List<string>();
             string Favorite = "";
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -265,14 +266,31 @@ namespace Evv.Database
                 {
                     while (reader.Read())
                     {
-                        Favorite = Convert.ToString(reader["FavoriteName"]);
-                        //double test = Convert.ToDouble(reader["Score"];
-                        //totalscores =+ test;
+                        Favorites.Add(Convert.ToString(reader["FavoriteName"]));
                     }
                     conn.Close();
                 }
             }
-            return Favorite;
+            return Favorites;
+        }
+        public void AddTripToFavorite(double score, double lenght, DateTime dag, string accountId, string transport, string FavoriteName)
+        {
+            string Query = "INSERT INTO [dbo].[Trip]([Date],[Score],[acountId],[Distance],[Transport],[FavoriteName])VALUES(@date,@score,@acountId,@distance,@transport,@FavoriteName)";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+
+                SqlCommand comm = conn.CreateCommand();
+                comm.CommandText = Query;
+                comm.Parameters.AddWithValue("@date", dag);
+                comm.Parameters.AddWithValue("@score", score);
+                comm.Parameters.AddWithValue("@acountId", accountId);
+                comm.Parameters.AddWithValue("@distance", lenght);
+                comm.Parameters.AddWithValue("@transport", transport);
+                comm.Parameters.AddWithValue("@FavoriteName", FavoriteName);
+                comm.ExecuteNonQuery();
+            }
         }
     }
 }

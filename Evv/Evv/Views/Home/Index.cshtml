@@ -30,11 +30,11 @@
                     <div class="col-lg-5" style="padding: 12px;margin-left: auto; margin-right:auto;">
                         <div class="form-group">
                             <label class="control-label">Means of transport</label>
-                            @Html.DropDownList(nameof(Model.Vehicle_Modifier), Model.VehicleModifierSelectList, new { @class = "form-control", @onchange = "SetState()", @id = "ModeOfTransport"})
+                            @Html.DropDownList(nameof(Model.FavoriteNames), Model.VehicleModifierSelectList, new { @class = "form-control", @onchange = "SetState()", @id = "ModeOfTransport"})
                         </div>
                         <div class="form-group">
                             <label asp-for="Distance" class="control-label">Distance (KM)</label>
-                            <input asp-for="Distance" class="form-control" id="distance" type="number" placeholder="Enter distance"/>
+                            <input asp-for="Distance" class="form-control" id="distance" type="text" placeholder="Enter distance"/>
                         </div>
                     </div>
 
@@ -44,7 +44,19 @@
                         </div>
                         </div>*@
                 </div>
-
+                <div class="col-lg-5" style="padding: 12px;margin-left: auto; margin-right:auto;">
+                <div class="form-group" id="Favrotit">
+                    <label class="control-label">List of Favorites</label>
+                    <select asp-for="ChosenfavoriteName" class="form-control">
+                        @foreach (var item in Model.FavoriteNames)
+                        {
+                                <option>
+                                @item
+                            </option>
+                        }
+                    </select>
+                </div>
+                </div>
                 <input class="form-control btn btn-primary" id="BtnAddTrip" type="submit" value="Add trip" style="margin-left: auto; margin-right:auto;" onclick="notify()" name="submit"/>
                 <input class="form-control btn btn-primary" id="BtnFavrotit" type="submit" value="Add to favorites" style="margin-left: auto; margin-right:auto; display: none;" name="submit"/>
             </form>
@@ -78,6 +90,37 @@
                             
                         </div>
                     </div>
+                    <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                        <center>
+                            <table class="table my-0" id="dataTable">
+                                <thead>
+                                    <tr>
+                                        <form method="post">
+                                        <th> Favorite trips name</th>
+                                        <th></th>
+            </form>
+            </tr>
+            </thead>
+                                @foreach (var Name in Model.FavoriteNames)
+                                {
+                <tbody>
+                    <tr>
+                        <td>@Name</td>
+                        <td><button class="btnadd" name="button">Travel trip</button></td>
+
+                    </tr>
+                </tbody>
+                                }
+
+            <tfoot>
+                <tr>
+                    <th> Favorite trips name</th>
+                    <th></th>
+                </tr>
+            </tfoot>
+            </table>
+            </center>
+        </div>
 
 
                     @*                        <div class="col d-flex d-sm-flex d-lg-flex flex-column align-items-center justify-content-sm-center align-items-sm-center align-items-lg-center" style="padding: 12px;">
@@ -107,9 +150,11 @@ function checkBox() {
         if(checkBox.checked){
             document.getElementById("BtnFavrotit").style.display = "block";
             document.getElementById("BtnAddTrip").style.display = "none";
+            document.getElementById("Favrotit").style.display = "block"
             }else{
                 document.getElementById("BtnFavrotit").style.display = "none";
                 document.getElementById("BtnAddTrip").style.display = "block";
+                document.getElementById("Favrotit").style.display = "none"
                 }
         }
 

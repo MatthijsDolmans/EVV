@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Net.Mail;
 using System.Security.Claims;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace Evv.Controllers
 {
@@ -23,7 +24,7 @@ namespace Evv.Controllers
         {
             bool HasData = true;
 
-            if(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier) != null)
+            if (User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier) != null)
             {
                 SetSession();
             }
@@ -34,22 +35,33 @@ namespace Evv.Controllers
             }
 
             ViewBag.page = "Home";
-
+            DatabaseClass db = new DatabaseClass();
             if (favorite != null)
             {
-                DatabaseClass db = new DatabaseClass();
                 db.AddFavorite(HttpContext.Session.GetString("UserId"), viewModel.FavoriteName);
 
             }
             else
             {
-                Trip trip = new Trip(viewModel.Distance, viewModel.Vehicle_Modifier, viewModel.People, viewModel.DateCreated, HttpContext.Session.GetString("UserId"), submit);
-                viewModel.Distance = trip.GetDistance();
-                viewModel.score = trip.CalculateScore();
-                viewModel.DateCreated = trip.GetDate();
-                ViewBag.page = "Home";
+                if (submit == "Add trip")
+                {
+                    Trip trip = new Trip(viewModel.Distance, viewModel.Vehicle_Modifier, viewModel.People, viewModel.DateCreated, HttpContext.Session.GetString("UserId"));
+                    viewModel.Distance = trip.GetDistance();
+                    viewModel.score = trip.CalculateScore();
+                    viewModel.DateCreated = trip.GetDate();
+                    ViewBag.page = "Home";
+                }
+                else if (submit == "Add to favorites")
+                {
+                    Trip trip = new Trip(viewModel.Distance, viewModel.Vehicle_Modifier, viewModel.People, viewModel.DateCreated, HttpContext.Session.GetString("UserId"),viewModel.ChosenfavoriteName);
+                    viewModel.Distance = trip.GetDistance();
+                    viewModel.score = trip.CalculateScore();
+                    viewModel.DateCreated = trip.GetDate();
+                    ViewBag.page = "Home";
+                }
+
             }
-            
+            viewModel.FavoriteNames = db.GetFavoriteName(HttpContext.Session.GetString("UserId"));
             if (!HasData)
             {
                 string userid = HttpContext.Session.GetString("UserId");
