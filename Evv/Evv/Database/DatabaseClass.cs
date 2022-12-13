@@ -233,5 +233,33 @@ namespace Evv.Database
 
             return list;
         }
+
+
+        public string GetUserName(string Userid)
+        {
+            string name = "";
+
+            string Query = "SELECT first_name, last_name FROM Account WHERE id = @userId";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                SqlCommand comm = new SqlCommand(Query, conn);
+                comm.Parameters.AddWithValue("@userId", Userid);
+
+                conn.Open();
+
+                using (SqlDataReader reader = comm.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        name = reader["first_name"].ToString() + " " + reader["last_name"].ToString();
+                    }
+
+                    conn.Close();
+                }
+            }
+
+            return name;
+        }
     }
 }

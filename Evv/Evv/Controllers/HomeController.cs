@@ -34,12 +34,18 @@ namespace Evv.Controllers
             }
 
             ViewBag.page = "Home";
-            
+            SetUser();
+
             Trip trip = new Trip(viewModel.Distance, viewModel.Vehicle_Modifier, viewModel.People,viewModel.DateCreated, HttpContext.Session.GetString("UserId"));
             viewModel.Distance = trip.GetDistance();
             viewModel.score = trip.CalculateScore();
             viewModel.DateCreated = trip.GetDate();
             ViewBag.page = "Home";
+
+            if(viewModel.displaystate == "" || viewModel.displaystate == null)
+            {
+                viewModel.displaystate = "none";
+            }
 
             if (!HasData)
             {
@@ -89,6 +95,14 @@ namespace Evv.Controllers
             {
                 return true;
             }
+        }
+
+        private void SetUser()
+        {
+            string userId = HttpContext.Session.GetString("UserId");
+            DatabaseClass databaseClass = new DatabaseClass();
+
+            ViewBag.Name = databaseClass.GetUserName(userId);
         }
     }
 }

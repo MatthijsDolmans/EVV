@@ -1,9 +1,23 @@
 ﻿@model TripViewModel
+@using System.Web;
 @using Evv.Helpers;
 @{
 
     ViewData["Title"] = "Home Page";
 }
+
+<div class="fadeMe" id="fadeMeDisplay"></div>
+<div class="alert-form" id="alertDisplay">
+    <div class="card">
+  <div class="card-header">
+    Alert
+  </div>
+  <div class="card-body">
+    <p class="card-text" id="alertContent"></p>
+    <a class="btn btn-primary" style="width: 100%;" onclick="closeAlert()">Close</a>
+  </div>
+</div>
+</div>
 
 <div class="container-fluid">
     <h3 class="text-dark mb-4">Add a trip</h3>
@@ -55,6 +69,25 @@
 </div>
 
 <script>
+
+    function SetDisplay(){
+        console.log(document.cookie)
+
+          const cookieValue = document.cookie.split('; ').find((row) => row.startsWith('state='))?.split('=')[1];
+          const cookieValue2 = document.cookie.split('; ').find((row) => row.startsWith('text='))?.split('=')[1];
+
+          document.getElementById("fadeMeDisplay").style.display = cookieValue;
+          document.getElementById("alertDisplay").style.display = cookieValue;
+
+          SetAlertText(document.createTextNode(cookieValue2));
+    }
+
+    function closeAlert(){
+        document.cookie = "state=none; SameSite=None; Secure";
+        document.getElementById("fadeMeDisplay").style.display = "none";
+        document.getElementById("alertDisplay").style.display = "none";
+    }
+
     function SetState(){
         let TransportCode = document.getElementById("ModeOfTransport").value;
 
@@ -67,6 +100,8 @@
             document.getElementById("PeopleInput").hidden = false;
             document.getElementById("PeopleText").hidden = false;
         }
+
+        SetDisplay();
     }
 
     function notify(){
@@ -74,7 +109,8 @@
         let check2 = false;
 
         if( parseInt(document.getElementById("distance").value) < 1 ||  document.getElementById("distance").value == ""){
-            alert("Your distance needs to be higher then 0.");
+            document.cookie = "state=block; SameSite=None; Secure";
+            document.cookie = "text=Distance has to be greater then 0; SameSite=None; Secure";
 
             check = false
         }
@@ -83,7 +119,9 @@
         }
 
         if(parseInt(document.getElementById("PeopleInput").value) < 1 ||  document.getElementById("PeopleInput").value == ""){
-            alert("The amount of people you travel with needs to be more then 0.");
+            document.cookie = "state=block; SameSite=None; Secure";
+            document.cookie = "text=The amount of people you travel with needs to be more then 0.; SameSite=None; Secure";
+
             check2 = false
         }
         else{
@@ -91,7 +129,8 @@
         }
 
         if(document.getElementById("date").value == ""){
-            alert("Fill in a valid date");
+            document.cookie = "state=block; SameSite=None; Secure";
+            document.cookie = "text=Fill in a valid date; SameSite=None; Secure";
             check3 = false
         }
         else{
@@ -99,7 +138,13 @@
         }
             
         if(check == true && check2 == true && check3 == true){
-            alert("Your trip has been added");
+            document.cookie = "state=block; SameSite=None; Secure";
+            document.cookie = "text=Your trip has been added; SameSite=None; Secure";
         }
+    }
+
+    function SetAlertText(text){
+        var paragraph = document.getElementById("alertContent");
+        paragraph.appendChild(text);
     }
 </script>
