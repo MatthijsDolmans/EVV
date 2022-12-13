@@ -85,6 +85,8 @@
                                     <th><button class="btnSort" name="button" value="Vehicle"><strong>Means of transport</strong></button></th>
                                     <th><button class="btnSort" name="button" value="Distance"><strong>Distance</strong></button></th>
                                     <th><center><button class="btnSort" name="button" value="PenaltyPoints"><strong>Penalty points</strong></button></center></th>
+                                    <th></th>
+                                    <th></th>
                                 </form>
                             </tr>
                         </thead>
@@ -93,13 +95,12 @@
                             <tbody>
                                 <form method="get">
                                     <tr>
-                                        <td>@trip.Id</td>
                                         <td>@trip.DateCreated.ToString("dd/MM/yyyy")</td>
                                         <td>@trip.Vehicle.Replace("_"," ")</td>
                                         <td>@trip.Distance</td>
                                         <td>@trip.Score</td>
-                                        <td><button class="nav-link text-dark" asp-area="" asp-controller="Overview" asp-action="Delete" value="@trip.Id" name="DeleteId" type="submit">Delete</button></td>
-                                        <td><button class="nav-link text-dark" asp-area="" asp-controller="Overview" asp-action="Edit" value="@trip.Id" name="TripId" type="submit">Edit</button></td>
+                                        <td><button class="btn btn-primary" asp-area="" asp-controller="Overview" asp-action="Delete" value="@trip.Id" name="DeleteId" type="submit">Delete</button></td>
+                                        <td><button class="btn btn-primary" asp-area="" asp-controller="Overview" asp-action="Edit" value="@trip.Id" name="TripId" type="submit">Edit</button></td>
                                     </tr>
                                 </form>
                             </tbody>
@@ -112,6 +113,8 @@
                                 <td><strong>Means of transport</strong></td>
                                 <td><strong>Distance</strong></td>
                                 <td><strong><center>Penalty points</center></strong></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         </tfoot>
                     </table>

@@ -53,11 +53,19 @@ namespace Evv.Classes
 
         public int GetPeople(double distance, double points, string vehicleType)
         {
-            int people = 0; 
+            int people = 1; 
             foreach (Vehicle_Modifier item in Enum.GetValues(typeof(Vehicle_Modifier))) 
             {
-                if(item.ToString() == vehicleType)
+                if (item == Vehicle_Modifier.Walk_Bike) 
                 {
+                    //walk bike deleten 
+                    people = 1;
+                    break;
+                }
+
+                else if(item.ToString() == vehicleType)
+                {
+                    //walk bike deleten 
                     people = Convert.ToInt32(Math.Round(distance / (points * (1000 / Convert.ToInt32(item))), 0));
                     break;
                 }
