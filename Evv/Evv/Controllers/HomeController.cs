@@ -20,7 +20,7 @@ namespace Evv.Controllers
         }
 
         [Authorize]
-        public IActionResult Index(TripViewModel viewModel, string? submit, string? favorite)
+        public IActionResult Index(TripViewModel viewModel, string? submit, string? favorite,string? submit2)
         {
             bool HasData = true;
 
@@ -59,7 +59,10 @@ namespace Evv.Controllers
                     viewModel.DateCreated = trip.GetDate();
                     ViewBag.page = "Home";
                 }
-
+                if(submit2 != null)
+                {
+                    db.AddTripFromFavorites(HttpContext.Session.GetString("UserId"), submit2);
+                }
             }
             viewModel.FavoriteNames = db.GetFavoriteName(HttpContext.Session.GetString("UserId"));
             if (!HasData)

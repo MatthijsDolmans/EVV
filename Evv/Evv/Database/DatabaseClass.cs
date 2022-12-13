@@ -32,6 +32,29 @@ namespace Evv.Database
                 comm.ExecuteNonQuery();
             }
         }
+        public void AddTripFromFavorites(string accountId, string favorite)
+        {
+            string Query = "SELECT * FROM Trip WHERE acountId = @userId and FavoriteName = @favorite";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                SqlCommand comm = new SqlCommand(Query, conn);
+                comm.Parameters.AddWithValue("@userId", accountId);
+                comm.Parameters.AddWithValue("@favorite", favorite);
+
+                conn.Open();
+
+                using (SqlDataReader reader = comm.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        AddTrip(Convert.ToDouble(reader["Score"]), Convert.ToDouble(reader["Distance"]), DateTime.Now, accountId, reader["Transport"].ToString());
+                    }
+
+                    conn.Close();
+                }
+            }
+        }
 
         public Account GetCurentUserData(string userId)
         {
