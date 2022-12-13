@@ -91,17 +91,20 @@
                         @foreach(var trip in Model.trips)
                         {
                             <tbody>
-                                <tr>
-                                    <td>@trip.Id</td>
-                                    <td>@trip.DateCreated.ToString("dd/MM/yyyy")</td>
-                                    <td>@trip.Vehicle.Replace("_"," ")</td>
-                                    <td>@trip.Distance</td>
-                                    <td>@trip.Score</td>
-                                    <td><button>Delete</button></td>
-                                    <td><button>Edit</button></td>
-                                </tr>
+                                <form method="get">
+                                    <tr>
+                                        <td>@trip.Id</td>
+                                        <td>@trip.DateCreated.ToString("dd/MM/yyyy")</td>
+                                        <td>@trip.Vehicle.Replace("_"," ")</td>
+                                        <td>@trip.Distance</td>
+                                        <td>@trip.Score</td>
+                                        <td><button class="nav-link text-dark" asp-area="" asp-controller="Overview" asp-action="Delete" value="@trip.Id" name="DeleteId" type="submit">Delete</button></td>
+                                        <td><button class="nav-link text-dark" asp-area="" asp-controller="Overview" asp-action="Edit" value="@trip.Id" name="TripId" type="submit">Edit</button></td>
+                                    </tr>
+                                </form>
                             </tbody>
                         }
+
 
                         <tfoot>
                             <tr>

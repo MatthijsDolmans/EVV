@@ -6,6 +6,7 @@ namespace Evv.Models;
 
 public class TripViewModel
 {
+    public int TripId { get; set; }
     public double Distance { get; set; }
     public int People { get; set; }
     public double score { get; set; }

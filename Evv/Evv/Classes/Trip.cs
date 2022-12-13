@@ -1,4 +1,5 @@
 ﻿using Evv.Database;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Xml.Linq;
 
@@ -39,24 +40,29 @@ namespace Evv.Classes
             People = GetPeople(distance, score, vehicle_Modifier);
         }
 
+        public Trip(int id, double distance, Vehicle_Modifier vehicle_Modifier, DateTime datecreate, int people, string vehicle)
+        {
+            Id = id; 
+            Distance = distance;
+            Vehicle_Type = vehicle_Modifier;
+            DateCreated= datecreate;
+            People = people;
+            Score = CalculateScore();
+            Vehicle = vehicle;
+        }
+
         public int GetPeople(double distance, double points, string vehicleType)
         {
-            int intMod = 0;
+            int people = 0; 
             foreach (Vehicle_Modifier item in Enum.GetValues(typeof(Vehicle_Modifier))) 
             {
                 if(item.ToString() == vehicleType)
                 {
-                    intMod = Convert.ToInt32(item);
+                    people = Convert.ToInt32(Math.Round(distance / (points * (1000 / Convert.ToInt32(item))), 0));
+                    break;
                 }
             }
-
-            return Convert.ToInt32(Math.Round(distance / (points * (1000 / intMod)), 0));
-
-            // x = Distance / (points ( 1000 / mod)
-            //double mod = points * (1000 / intMod);
-            //double dPeople = distance / mod;
-            //double ddPeople = (distance / (points * (1000 / intMod)));
-            //int people = Convert.ToInt32(Math.Round((distance / (points * (1000 / intMod))), 0));
+            return people;
         }
 
         public double CalculateScore()
