@@ -19,7 +19,7 @@ namespace Evv.Controllers
         }
 
         [Authorize]
-        public IActionResult Index(TripViewModel viewModel)
+        public IActionResult Index(TripViewModel viewModel, string? submit, string? favorite)
         {
             bool HasData = true;
 
@@ -34,13 +34,22 @@ namespace Evv.Controllers
             }
 
             ViewBag.page = "Home";
-            
-            Trip trip = new Trip(viewModel.Distance, viewModel.Vehicle_Modifier, viewModel.People,viewModel.DateCreated, HttpContext.Session.GetString("UserId"));
-            viewModel.Distance = trip.GetDistance();
-            viewModel.score = trip.CalculateScore();
-            viewModel.DateCreated = trip.GetDate();
-            ViewBag.page = "Home";
 
+            if (favorite != null)
+            {
+                DatabaseClass db = new DatabaseClass();
+                db.AddFavorite(HttpContext.Session.GetString("UserId"), viewModel.FavoriteName);
+
+            }
+            else
+            {
+                Trip trip = new Trip(viewModel.Distance, viewModel.Vehicle_Modifier, viewModel.People, viewModel.DateCreated, HttpContext.Session.GetString("UserId"), submit);
+                viewModel.Distance = trip.GetDistance();
+                viewModel.score = trip.CalculateScore();
+                viewModel.DateCreated = trip.GetDate();
+                ViewBag.page = "Home";
+            }
+            
             if (!HasData)
             {
                 string userid = HttpContext.Session.GetString("UserId");

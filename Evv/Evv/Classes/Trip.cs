@@ -13,7 +13,7 @@ namespace Evv.Classes
         public Vehicle_Modifier Vehicle_Type { get; private set; }
         public string Vehicle { get; set; }
 
-        public Trip(double distance, Vehicle_Modifier vehicle_Modifier, int people, DateTime datecreated, string accountId)
+        public Trip(double distance, Vehicle_Modifier vehicle_Modifier, int people, DateTime datecreated, string accountId, string button)
         {
             DatabaseClass database = new DatabaseClass();
             Distance = distance;
@@ -23,8 +23,16 @@ namespace Evv.Classes
             Score = CalculateScore();
             if (Score != null && Distance != null && DateCreated != null && accountId != null && Distance > 0 && People > 0)
             {
-                Console.WriteLine(accountId);
-                database.AddTrip(Score, Distance, DateCreated, accountId, Vehicle_Type.ToString());
+                Console.WriteLine(button);
+                if (button == "Add trip")
+                {
+                    database.AddTrip(Score, Distance, DateCreated, accountId, Vehicle_Type.ToString());
+                }
+                else if (button == "Add to favorites")
+                {
+
+                }
+                
             }
         }
         public Trip(double distance, string vehicle_Modifier, DateTime datecreated, double score)

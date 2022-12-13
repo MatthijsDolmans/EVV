@@ -24,6 +24,8 @@
                             <label asp-for="People" class="control-label" id="PeopleText">People</label>
                             <input asp-for="People" type="number" class="form-control" placeholder="Enter amount of people" value="1" id="PeopleInput" />
                         </div>
+                        <label for="Favorite">Favorites </label>
+                        <input type="checkbox" id="CheckBox" name="CheckBox" value="CheckBox" onclick="checkBox()">
                     </div>
                     <div class="col-lg-5" style="padding: 12px;margin-left: auto; margin-right:auto;">
                         <div class="form-group">
@@ -42,7 +44,9 @@
                         </div>
                         </div>*@
                 </div>
-                <input class="form-control btn btn-primary" type="submit" value="Add trip" style="margin-left: auto; margin-right:auto;" onclick="notify()"/>
+
+                <input class="form-control btn btn-primary" id="BtnAddTrip" type="submit" value="Add trip" style="margin-left: auto; margin-right:auto;" onclick="notify()" name="submit"/>
+                <input class="form-control btn btn-primary" id="BtnFavrotit" type="submit" value="Add to favorites" style="margin-left: auto; margin-right:auto; display: none;" name="submit"/>
             </form>
             @*                <section>
                 <hr>
@@ -54,7 +58,61 @@
     </div>
 </div>
 
+<div class="container-fluid"><br/>
+    <h3 class="text-dark mb-4">Favorites</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 fw-bold">Favorites Info</p>
+        </div>
+        <div class="card-body" style="width: 100%; margin-left: auto; margin-right:auto;">
+            <form>
+                @Html.ValidationSummary()
+                <div class="row" style="margin-right: 8px;margin-left: 8px;margin-left: auto; margin-right:auto;">
+                    <div class="col-lg-5" style="">
+                        <div class="form-group">
+                            <label asp-for="FavoriteName" class="control-label">Favorite name</label>
+                            <input asp-for="FavoriteName" class="form-control" lang="en" type="text" id="Favorite"/><br/>
+                            <input class="form-control btn btn-primary" id="BtnAddTrip" type="submit" value="Add favorite" style="margin-left: auto; margin-right:auto;" name="favorite"/>
+                        </div>
+                        <div class="form-group">
+                            
+                        </div>
+                    </div>
+
+
+                    @*                        <div class="col d-flex d-sm-flex d-lg-flex flex-column align-items-center justify-content-sm-center align-items-sm-center align-items-lg-center" style="padding: 12px;">
+                        <div class="form-group">
+
+                        </div>
+                        </div>*@
+                </div>
+
+               
+            </form>
+            @*                <section>
+                <hr>
+                <br>
+                <p> Vehicle: @Model.Vehicle_Modifier.GetDescription() <br> Penalty Points: @Model.score <br> People: @Model.People <br> Distance: @Model.Distance <br> Date: @Model.DateCreated.ToString("dd/MM/yyyy")</p>
+                <br>
+                </section>*@
+        </div>
+    </div>
+</div>
+
+
+
 <script>
+function checkBox() {
+        var checkBox = document.getElementById('CheckBox');
+        if(checkBox.checked){
+            document.getElementById("BtnFavrotit").style.display = "block";
+            document.getElementById("BtnAddTrip").style.display = "none";
+            }else{
+                document.getElementById("BtnFavrotit").style.display = "none";
+                document.getElementById("BtnAddTrip").style.display = "block";
+                }
+        }
+
     function SetState(){
         let TransportCode = document.getElementById("ModeOfTransport").value;
 
@@ -102,4 +160,7 @@
             alert("Your trip has been added");
         }
     }
+    
+    
+
 </script>

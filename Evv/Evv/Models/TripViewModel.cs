@@ -11,6 +11,7 @@ public class TripViewModel
     public double score { get; set; }
     public DateTime DateCreated { get; set; }
     public Vehicle_Modifier Vehicle_Modifier { get; set; }
+    public string? FavoriteName { get; set; }
     public SelectList VehicleModifierSelectList {get        
         {
             IEnumerable<Vehicle_Modifier> vehicleModifiers = Enum.GetValues(typeof(Vehicle_Modifier)).Cast<Vehicle_Modifier>(); // google: how get all enum values in a list c#

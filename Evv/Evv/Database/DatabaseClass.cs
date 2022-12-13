@@ -233,5 +233,46 @@ namespace Evv.Database
 
             return list;
         }
+
+        public void AddFavorite(string userid, string favoriteName)
+        {
+            string Query = "INSERT INTO [dbo].[Favorites]([FavoriteName],[accountId])VALUES(@favoriteName,@userid)";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+
+                SqlCommand comm = conn.CreateCommand();
+                comm.CommandText = Query;
+                comm.Parameters.AddWithValue("@userid", userid);
+                comm.Parameters.AddWithValue("@favoriteName", favoriteName);
+                comm.ExecuteNonQuery();
+            }
+        }
+
+        public string GetFavoriteName(string userId)
+        {
+            string Query = "SELECT FavoriteName FROM Favorites WHERE accountId = @userId";
+            string Favorite = "";
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                SqlCommand comm = new SqlCommand(Query, conn);
+                comm.Parameters.AddWithValue("@userId", userId);
+
+                conn.Open();
+
+                using (SqlDataReader reader = comm.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Favorite = Convert.ToString(reader["FavoriteName"]);
+                        //double test = Convert.ToDouble(reader["Score"];
+                        //totalscores =+ test;
+                    }
+                    conn.Close();
+                }
+            }
+            return Favorite;
+        }
     }
 }
