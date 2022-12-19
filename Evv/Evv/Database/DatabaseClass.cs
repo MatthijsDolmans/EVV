@@ -166,7 +166,7 @@ namespace Evv.Database
                     while (reader.Read())
                     {
 
-                        Trip trip = new Trip(Convert.ToDouble(reader["Distance"]), reader["Transport"].ToString(), Convert.ToDateTime(reader["Date"]), Convert.ToDouble(reader["Score"]));
+                        Trip trip = new Trip((int)reader["tripId"],Convert.ToDouble(reader["Distance"]), reader["Transport"].ToString(), Convert.ToDateTime(reader["Date"]), Convert.ToDouble(reader["Score"]));
                         ListWithTrips.Add(trip);
                     }
 
@@ -341,6 +341,82 @@ namespace Evv.Database
             }
 
             return name;
+        }
+
+        public Trip GetTripByID(int TripId)
+        {
+            string Query = "SELECT * FROM Trip WHERE tripId = @TripID";
+
+            int tripID = 0;
+            double distance = 0;
+            string transport = "";
+            DateTime dateCreated = DateTime.Now;
+            double score = 0;
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                SqlCommand comm = new SqlCommand(Query, conn);
+                comm.Parameters.AddWithValue("@tripId", TripId);
+
+                conn.Open();
+
+                using (SqlDataReader reader = comm.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        tripID = (int)reader["tripId"];
+                        distance = Convert.ToDouble(reader["Distance"]);
+                        transport = reader["Transport"].ToString();
+                        dateCreated = Convert.ToDateTime(reader["Date"]);
+                        score = Convert.ToDouble(reader["Score"]);
+                    }
+
+                    conn.Close();
+                }
+            }
+
+            return new Trip(tripID, distance, transport, dateCreated, score);
+        }
+
+        public int UpdateTrip(Trip _trip)
+        {
+            int rowsaffected = 0;
+
+            //string Query = "INSERT INTO [dbo].[Trip]([Date],[Score],[acountId],[Distance],[Transport])VALUES(@date,@score,@acountId,@distance,@transport)";
+            string Query = "UPDATE Trip SET Date = @date, Score = @score, Distance = @distance, Transport = @transport WHERE tripId = @id";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+
+                SqlCommand comm = conn.CreateCommand();
+
+
+                comm.CommandText = Query;
+                comm.Parameters.AddWithValue("@id", _trip.Id);
+                comm.Parameters.AddWithValue("@date", _trip.DateCreated);
+                comm.Parameters.AddWithValue("@score", _trip.Score);
+                comm.Parameters.AddWithValue("@distance", _trip.Distance);
+                comm.Parameters.AddWithValue("@transport", _trip.Vehicle);
+                comm.ExecuteNonQuery();
+            }
+
+            return rowsaffected;
+        }
+
+        public void DeleteTrip(int id)
+        {
+            string Query = "DELETE FROM Trip WHERE tripId = @id";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+
+                SqlCommand comm = conn.CreateCommand();
+                comm.CommandText = Query;
+                comm.Parameters.AddWithValue("@id", id);
+                comm.ExecuteNonQuery();
+            }
         }
     }
 }

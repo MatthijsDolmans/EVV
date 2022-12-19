@@ -1,11 +1,14 @@
 ﻿using Evv.Database;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Xml.Linq;
+
 
 namespace Evv.Classes
 {
     public class Trip
     {
+        public int Id { get; set; }
         public double Distance { get; private set; }
         public double Score { get; private set; }
         public int People { get; private set; } = 1;
@@ -39,12 +42,47 @@ namespace Evv.Classes
                     database.AddTripToFavorite(Score, Distance, DateCreated, accountId, Vehicle_Type.ToString(),FavoriteName);
             }
         }
-        public Trip(double distance, string vehicle_Modifier, DateTime datecreated, double score)
+        public Trip(int id, double distance, string vehicle_Modifier, DateTime datecreated, double score)
         {
+            Id = id;
             Distance = distance;
             Vehicle = vehicle_Modifier;
             DateCreated = datecreated;
             Score = score;
+            People = GetPeople(distance, score, vehicle_Modifier);
+        }
+
+        public Trip(int id, double distance, Vehicle_Modifier vehicle_Modifier, DateTime datecreate, int people, string vehicle)
+        {
+            Id = id; 
+            Distance = distance;
+            Vehicle_Type = vehicle_Modifier;
+            DateCreated= datecreate;
+            People = people;
+            Score = CalculateScore();
+            Vehicle = vehicle;
+        }
+
+        public int GetPeople(double distance, double points, string vehicleType)
+        {
+            int people = 1; 
+            foreach (Vehicle_Modifier item in Enum.GetValues(typeof(Vehicle_Modifier))) 
+            {
+                if (item == Vehicle_Modifier.Walk_Bike) 
+                {
+                    //walk bike deleten 
+                    people = 1;
+                    break;
+                }
+
+                else if(item.ToString() == vehicleType)
+                {
+                    //walk bike deleten 
+                    people = Convert.ToInt32(Math.Round(distance / (points * (1000 / Convert.ToInt32(item))), 0));
+                    break;
+                }
+            }
+            return people;
         }
 
         public double CalculateScore()

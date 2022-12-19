@@ -1,0 +1,111 @@
+﻿@model TripViewModel
+@using Evv.Helpers;
+@{
+
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Add a trip</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 fw-bold">Trip Info</p>
+        </div>
+        <div class="card-body" style="width: 100%; margin-left: auto; margin-right:auto;">
+            <form method="post">
+                @Html.ValidationSummary()
+                <div class="row" style="margin-right: 8px;margin-left: 8px;margin-left: auto; margin-right:auto;">
+                    <div class="col-lg-5" style="padding: 12px;margin-left: auto; margin-right:auto;">
+                        <div class="form-group">
+                            <label asp-for="DateCreated" class="control-label">Date</label>
+                            <input asp-for="DateCreated" class="form-control" lang="en" type="date" id="date" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="People" class="control-label" id="PeopleText">People</label>
+                            <input asp-for="People" type="number" class="form-control" placeholder="Enter amount of people"  id="PeopleInput" />
+                        </div>
+                    </div>
+                    <div class="col-lg-5" style="padding: 12px;margin-left: auto; margin-right:auto;">
+                        <div class="form-group">
+                            <label class="control-label">Means of transport</label>
+                            @Html.DropDownList(nameof(Model.Vehicle_Modifier), Model.VehicleModifierSelectList, new { @class = "form-control", @onchange = "SetState()", @id = "ModeOfTransport"})
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Distance" class="control-label">Distance (KM)</label>
+                            <input asp-for="Distance" class="form-control" id="distance" type="text" placeholder="Enter distance" />
+                        </div>
+                    </div>
+
+                    @*                        <div class="col d-flex d-sm-flex d-lg-flex flex-column align-items-center justify-content-sm-center align-items-sm-center align-items-lg-center" style="padding: 12px;">
+                    <div class="form-group">
+
+                    </div>
+                    </div>*@
+                </div>
+                <input class="form-control btn btn-primary" type="submit" value="Edit trip" asp-action="Edit" style="margin-left: auto; margin-right:auto;" onclick="notify()" />
+            </form>
+
+            <h1>@Model.TripId</h1>
+            <h1>@Model.Distance</h1>
+            <h1>@Model.People</h1>
+            <h1>@Model.score</h1>
+            <h1>@Model.Vehicle_Modifier</h1>
+            @*                <section>
+            <hr>
+            <br>
+            <p> Vehicle: @Model.Vehicle_Modifier.GetDescription() <br> Penalty Points: @Model.score <br> People: @Model.People <br> Distance: @Model.Distance <br> Date: @Model.DateCreated.ToString("dd/MM/yyyy")</p>
+            <br>
+            </section>*@
+        </div>
+    </div>
+</div>
+
+<script>
+    function SetState() {
+        let TransportCode = document.getElementById("ModeOfTransport").value;
+
+        if (TransportCode == 20 || TransportCode == 0 || TransportCode == 6 || TransportCode == 182) {
+            document.getElementById("PeopleInput").hidden = true;
+            document.getElementById("PeopleText").hidden = true;
+            document.getElementById("PeopleInput").value = 1;
+        }
+        else {
+            document.getElementById("PeopleInput").hidden = false;
+            document.getElementById("PeopleText").hidden = false;
+        }
+    }
+
+    function notify() {
+        let check = false;
+        let check2 = false;
+
+        if (parseInt(document.getElementById("distance").value) < 1 || document.getElementById("distance").value == "") {
+            alert("Your distance needs to be higher then 0.");
+
+            check = false
+        }
+        else {
+            check = true;
+        }
+
+        if (parseInt(document.getElementById("PeopleInput").value) < 1 || document.getElementById("PeopleInput").value == "") {
+            alert("The amount of people you travel with needs to be more then 0.");
+            check2 = false
+        }
+        else {
+            check2 = true;
+        }
+
+        if (document.getElementById("date").value == "") {
+            alert("Fill in a valid date");
+            check3 = false
+        }
+        else {
+            check3 = true
+        }
+
+        if (check == true && check2 == true && check3 == true) {
+            alert("Your trip has been added");
+        }
+    }
+</script>
