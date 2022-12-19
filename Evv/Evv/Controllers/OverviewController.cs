@@ -26,7 +26,7 @@ namespace Evv.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
+    
         public IActionResult Edit(int TripId)
         {
             DatabaseClass _db = new DatabaseClass();
@@ -49,9 +49,18 @@ namespace Evv.Controllers
                 }
             }
 
-            return View (viewModel);
+            return View(viewModel);
         }
 
+
+        [HttpPost]
+        public IActionResult Edit(TripViewModel viewModel)
+        {
+            DatabaseClass _db = new();
+            Trip trip = new Trip((int)HttpContext.Session.GetInt32("tripID"), viewModel.Distance, viewModel.Vehicle_Modifier, viewModel.DateCreated, viewModel.People, viewModel.Vehicle_Modifier.ToString());
+            _db.UpdateTrip(trip);
+            return RedirectToAction("Index");
+        }
         
         public IActionResult Delete(int DeleteId)
         {

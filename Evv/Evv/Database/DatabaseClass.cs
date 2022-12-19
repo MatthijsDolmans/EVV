@@ -392,6 +392,7 @@ namespace Evv.Database
                 SqlCommand comm = conn.CreateCommand();
 
 
+
                 comm.CommandText = Query;
                 comm.Parameters.AddWithValue("@id", _trip.Id);
                 comm.Parameters.AddWithValue("@date", _trip.DateCreated);

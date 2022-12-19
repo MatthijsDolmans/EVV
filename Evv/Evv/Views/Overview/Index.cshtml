@@ -99,8 +99,8 @@
                                         <td>@trip.Vehicle.Replace("_"," ")</td>
                                         <td>@trip.Distance</td>
                                         <td>@trip.Score</td>
-                                        <td><button class="btn btn-primary" asp-area="" asp-controller="Overview" asp-action="Delete" value="@trip.Id" name="DeleteId" type="submit">Delete</button></td>
                                         <td><button class="btn btn-primary" asp-area="" asp-controller="Overview" asp-action="Edit" value="@trip.Id" name="TripId" type="submit">Edit</button></td>
+                                        <td><button class="btn btn-primary" asp-area="" asp-controller="Overview" asp-action="Delete" value="@trip.Id" name="DeleteId" type="submit">Delete</button></td>
                                     </tr>
                                 </form>
                             </tbody>
