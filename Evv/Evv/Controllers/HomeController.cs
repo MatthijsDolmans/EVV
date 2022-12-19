@@ -38,11 +38,13 @@ namespace Evv.Controllers
             DatabaseClass db = new DatabaseClass();
             if (favorite != null)
             {
+                SetUser();
                 db.AddFavorite(HttpContext.Session.GetString("UserId"), viewModel.FavoriteName);
-
             }
             else
             {
+                SetUser();
+
                 if (submit == "Add trip")
                 {
                     Trip trip = new Trip(viewModel.Distance, viewModel.Vehicle_Modifier, viewModel.People, viewModel.DateCreated, HttpContext.Session.GetString("UserId"));
@@ -113,6 +115,14 @@ namespace Evv.Controllers
             {
                 return true;
             }
+        }
+
+        private void SetUser()
+        {
+            string userId = HttpContext.Session.GetString("UserId");
+            DatabaseClass databaseClass = new DatabaseClass();
+
+            ViewBag.Name = databaseClass.GetUserName(userId);
         }
     }
 }
