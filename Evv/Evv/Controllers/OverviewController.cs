@@ -10,6 +10,7 @@ namespace Evv.Controllers
     {
         public IActionResult Index(OverviewViewModel viewModel, string button)
         {
+            SetUser();
             ViewBag.page = "Overview";
             string userid = HttpContext.Session.GetString("UserId");
             DatabaseClass databaseClass = new DatabaseClass();
@@ -29,6 +30,7 @@ namespace Evv.Controllers
     
         public IActionResult Edit(int TripId)
         {
+            SetUser();
             DatabaseClass _db = new DatabaseClass();
             Trip trip = _db.GetTripByID(TripId);
             TripViewModel viewModel = new TripViewModel();
@@ -68,6 +70,14 @@ namespace Evv.Controllers
             _db.DeleteTrip(DeleteId);
 
             return RedirectToAction("Index");
+        }
+
+        private void SetUser()
+        {
+            string userId = HttpContext.Session.GetString("UserId");
+            DatabaseClass databaseClass = new DatabaseClass();
+
+            ViewBag.Name = databaseClass.GetUserName(userId);
         }
     }
 }

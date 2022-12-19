@@ -9,6 +9,8 @@ namespace Evv.Controllers
     {
         public IActionResult Index()
         {
+            SetUser();
+
             ViewBag.page = "Leaderboard";
 
             DatabaseClass databaseclass = new DatabaseClass();
@@ -47,6 +49,13 @@ namespace Evv.Controllers
             view.people = orderedPeople;
 
             return View(view);
+        }
+        private void SetUser()
+        {
+            string userId = HttpContext.Session.GetString("UserId");
+            DatabaseClass databaseClass = new DatabaseClass();
+
+            ViewBag.Name = databaseClass.GetUserName(userId);
         }
     }
 }
