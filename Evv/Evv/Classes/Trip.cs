@@ -23,8 +23,20 @@ namespace Evv.Classes
             Score = CalculateScore();
             if (Score != null && Distance != null && DateCreated != null && accountId != null && Distance > 0 && People > 0)
             {
-                Console.WriteLine(accountId);
-                database.AddTrip(Score, Distance, DateCreated, accountId, Vehicle_Type.ToString());
+                    database.AddTrip(Score, Distance, DateCreated, accountId, Vehicle_Type.ToString());    
+            }
+        }
+        public Trip(double distance, Vehicle_Modifier vehicle_Modifier, int people, DateTime datecreated, string accountId,string FavoriteName)
+        {
+            DatabaseClass database = new DatabaseClass();
+            Distance = distance;
+            Vehicle_Type = vehicle_Modifier;
+            People = people;
+            DateCreated = datecreated;
+            Score = CalculateScore();
+            if (Score != null && Distance != null && DateCreated != null && accountId != null && Distance > 0 && People > 0)
+            {
+                    database.AddTripToFavorite(Score, Distance, DateCreated, accountId, Vehicle_Type.ToString(),FavoriteName);
             }
         }
         public Trip(double distance, string vehicle_Modifier, DateTime datecreated, double score)
