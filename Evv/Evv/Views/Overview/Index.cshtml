@@ -81,11 +81,11 @@
                         <thead>
                             <tr>
                                 <form method="post">
-                                    <th><button class="btnSort" name="button" value="Date"><strong>Date</strong></button></th>
-                                    <th><button class="btnSort" name="button" value="Vehicle"><strong>Means of transport</strong></button></th>
-                                    <th><button class="btnSort" name="button" value="Distance"><strong>Distance</strong></button></th>
-                                    <th><center><button class="btnSort" name="button" value="PenaltyPoints"><strong>Penalty points</strong></button></center></th>
-                                    <th></th>
+                                    <th style ="text-align: center"><button class="btnSort" name="button" s value="Date"><strong>Date</strong></button></th>
+                                    <th style="text-align: center"><button class="btnSort" name="button" value="Vehicle"><strong>Means of transport</strong></button></th>
+                                    <th style="text-align: center"><button class="btnSort" name="button" value="Distance"><strong>Distance</strong></button></th>
+                                    <th style="text-align: center"><center><button class="btnSort" name="button" value="PenaltyPoints"><strong>Penalty points</strong></button></center></th>
+                                    <th ></th>
                                     <th></th>
                                 </form>
                             </tr>
@@ -95,12 +95,12 @@
                             <tbody>
                                 <form method="get">
                                     <tr>
-                                        <td>@trip.DateCreated.ToString("dd/MM/yyyy")</td>
-                                        <td>@trip.Vehicle.Replace("_"," ")</td>
-                                        <td>@trip.Distance</td>
-                                        <td>@trip.Score</td>
-                                        <td><button class="btn btn-primary" asp-area="" asp-controller="Overview" asp-action="Edit" value="@trip.Id" name="TripId" type="submit">Edit</button></td>
-                                        <td><button class="btn btn-primary" asp-area="" asp-controller="Overview" asp-action="Delete" value="@trip.Id" name="DeleteId" type="submit">Delete</button></td>
+                                        <td style ="text-align: center">@trip.DateCreated.ToString("dd/MM/yyyy")</td>
+                                        <td style="text-align: center">@trip.Vehicle.Replace("_"," ")</td>
+                                        <td style="text-align: center">@trip.Distance</td>
+                                        <td style="text-align: center">@trip.Score</td>
+                                    <td style="text-align: center"><button class="btn btn-warning" asp-area="" asp-controller="Overview" asp-action="Edit" value="@trip.Id" name="TripId" type="submit"><i class="fas fa-edit"></i></button></td>
+                                    <td style="text-align: center"><button class="btn btn-danger" asp-area="" asp-controller="Overview" asp-action="Delete" value="@trip.Id" name="DeleteId" type="submit"><i class="fas fa-trash"></i></button></td>
                                     </tr>
                                 </form>
                             </tbody>
@@ -109,33 +109,17 @@
 
                         <tfoot>
                             <tr>
-                                <td><strong>Date</strong></td>
-                                <td><strong>Means of transport</strong></td>
-                                <td><strong>Distance</strong></td>
-                                <td><strong><center>Penalty points</center></strong></td>
-                                <td></td>
+                                <td style="text-align: center"><strong>Date</strong></td>
+                                <td style="text-align: center"><strong>Means of transport</strong></td>
+                                <td style="text-align: center"><strong>Distance</strong></td>
+                                <td style="text-align: center"><strong><center>Penalty points</center></strong></td>
+                                <td ></td>
                                 <td></td>
                             </tr>
                         </tfoot>
                     </table>
                     </center>
                 </div>
-                @*<div class="row">
-                    <div class="col-md-6 align-self-center">
-                        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 5 of 5</p>
-                    </div>
-                    @*<div class="col-md-6">
-                        <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-                            <ul class="pagination">
-                                <li class="page-item disabled"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>*@
             </div>
         </div>
     </div>

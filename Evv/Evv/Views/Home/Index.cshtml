@@ -9,14 +9,14 @@
 <div class="fadeMe" id="fadeMeDisplay"></div>
 <div class="alert-form" id="alertDisplay">
     <div class="card">
-  <div class="card-header">
-    Alert
-  </div>
-  <div class="card-body">
-    <p class="card-text" id="alertContent"></p>
-    <a class="btn btn-primary" style="width: 100%;" onclick="closeAlert()">Close</a>
-  </div>
-</div>
+      <div class="card-header">
+        Alert
+      </div>
+      <div class="card-body">
+        <p class="card-text" id="alertContent"></p>
+        <a class="btn btn-primary" style="width: 100%;" onclick="closeAlert()">Close</a>
+      </div>
+    </div>
 </div>
 
 <div class="container-fluid">
@@ -27,16 +27,19 @@
         </div>
         <div class="card-body" style="width: 100%; margin-left: auto; margin-right:auto;">
             <form>
-                @Html.ValidationSummary()
                 <div class="row" style="margin-right: 8px;margin-left: 8px;margin-left: auto; margin-right:auto;">
                     <div class="col-lg-5" style="padding: 12px;margin-left: auto; margin-right:auto;">
                         <div class="form-group">
                             <label asp-for="DateCreated" class="control-label">Date</label>
                             <input asp-for="DateCreated" class="form-control" lang="en" type="date" id="date" />
+                            @Html.ValidationMessageFor(model => model.DateCreated, "", new { @class = "text-danger" })
                         </div>
-                        <div class="form-group">
-                            <label asp-for="People" class="control-label" id="PeopleText">People</label>
-                            <input asp-for="People" type="number" class="form-control" placeholder="Enter amount of people" value="1" id="PeopleInput" />
+                        <div class="form-group", id="">
+                            @Html.LabelFor(model => model.People, htmlAttributes: new { @class = "control-label col-md-2", @id="PeopleText" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.People, new { htmlAttributes = new { @class = "form-control", @id="PeopleInput" } })
+                                @Html.ValidationMessageFor(model => model.People, "", new { @class = "text-danger", @id="PeopleText" })
+                            </div>
                         </div>
                         <label for="Favorite">Favorites </label>
                         <input type="checkbox" id="CheckBox" name="CheckBox" value="CheckBox" onclick="checkBox()">
@@ -47,26 +50,25 @@
                             @Html.DropDownList(nameof(Model.Vehicle_Modifier), Model.VehicleModifierSelectList, new { @class = "form-control", @onchange = "SetState()", @id = "ModeOfTransport"})
                         </div>
                         <div class="form-group">
-                            <label asp-for="Distance" class="control-label">Distance (KM)</label>
-                            <input asp-for="Distance" class="form-control" id="distance" type="text" placeholder="Enter distance" />
+                            @Html.LabelFor(model => model.Distance, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Distance, new { htmlAttributes = new { @class = "form-control", @id="distance"} })
+                                @Html.ValidationMessageFor(model => model.Distance, "", new { @class = "text-danger" })
+                            </div>
                         </div>
                     </div>
-
-                    @*                        <div class="col d-flex d-sm-flex d-lg-flex flex-column align-items-center justify-content-sm-center align-items-sm-center align-items-lg-center" style="padding: 12px;">
-                    <div class="form-group">
-
-                    </div>
-                    </div>*@
                 </div>
                 <div class="col-lg-5" style="padding: 12px;margin-left: auto; margin-right:auto;">
                     <div class="form-group" id="Favrotit">
                         <label class="control-label">List of Favorites</label>
                         <select asp-for="ChosenfavoriteName" class="form-control">
-                            @foreach (var item in Model.FavoriteNames)
-                            {
-                                <option>
-                                    @item
-                                </option>
+                            @if(Model.FavoriteNames != null){
+                                @foreach (var item in Model.FavoriteNames)
+                                {
+                                    <option>
+                                        @item
+                                    </option>
+                                }
                             }
                         </select>
                     </div>
@@ -74,12 +76,6 @@
                 <input class="form-control btn btn-primary" id="BtnAddTrip" type="submit" value="Add trip" style="margin-left: auto; margin-right:auto;" onclick="notify()" name="submit" />
                 <input class="form-control btn btn-primary" id="BtnFavrotit" type="submit" value="Add to favorites" style="margin-left: auto; margin-right:auto; display: none;" name="submit" />
             </form>
-            @*                <section>
-            <hr>
-            <br>
-            <p> Vehicle: @Model.Vehicle_Modifier.GetDescription() <br> Penalty Points: @Model.score <br> People: @Model.People <br> Distance: @Model.Distance <br> Date: @Model.DateCreated.ToString("dd/MM/yyyy")</p>
-            <br>
-            </section>*@
         </div>
     </div>
 </div>
@@ -93,7 +89,6 @@
         </div>
         <div class="card-body" style="width: 100%; margin-left: auto; margin-right:auto;">
             <form method="post">
-                @Html.ValidationSummary()
                 <div class="row" style="margin-right: 8px;margin-left: 8px;margin-left: auto; margin-right:auto;">
                     <div class="col-lg-5" style="">
                         <div class="form-group">
@@ -114,43 +109,30 @@
                                     </tr>
                                </thead>
                                 <tbody>
-                                @foreach (var Name in Model.FavoriteNames)
-                                {
-                                     <tr>
-                                          <td>@Name</td>
-                                          <td><button class="btnadd" name="submit2" value="@Name">Travel trip</button></td>
-                                     </tr>
-                                }
-          </tbody> 
-            <tfoot>
-                <tr>
-                    <th> Favorite trips name</th>
-                    <th></th>
-                </tr>
-            </tfoot>
-            </table>
-            </center>
-        </div>
+                                    @if (Model.FavoriteNames != null)
+                                    {
+                                        @foreach (var Name in Model.FavoriteNames)
+                                        {
+                                            <tr>
+                                                <td>@Name</td>
+                                                <td><button class="btnadd" name="submit2" value="@Name">Travel trip</button></td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody> 
+                                <tfoot>
+                                <tr>
+                                    <th> Favorite trips name</th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                         </table>
+                    </center>
+                </div>
             </form>
-
-
-
-                    @*                        <div class="col d-flex d-sm-flex d-lg-flex flex-column align-items-center justify-content-sm-center align-items-sm-center align-items-lg-center" style="padding: 12px;">
-        <div class="form-group">
-
         </div>
-        </div>*@
     </div>
-
-
-            @*                <section>
-    <hr>
-    <br>
-    <p> Vehicle: @Model.Vehicle_Modifier.GetDescription() <br> Penalty Points: @Model.score <br> People: @Model.People <br> Distance: @Model.Distance <br> Date: @Model.DateCreated.ToString("dd/MM/yyyy")</p>
-    <br>
-    </section>*@
 </div>
-    </div>
 
 
 
@@ -207,13 +189,11 @@
     }
 
     function notify() {
+
         let check = false;
         let check2 = false;
 
         if( parseInt(document.getElementById("distance").value) < 1 ||  document.getElementById("distance").value == ""){
-            document.cookie = "state=block; SameSite=None; Secure";
-            document.cookie = "text=Distance has to be greater then 0; SameSite=None; Secure";
-
             check = false
         }
         else {
@@ -221,9 +201,6 @@
         }
 
         if(parseInt(document.getElementById("PeopleInput").value) < 1 ||  document.getElementById("PeopleInput").value == ""){
-            document.cookie = "state=block; SameSite=None; Secure";
-            document.cookie = "text=The amount of people you travel with needs to be more then 0.; SameSite=None; Secure";
-
             check2 = false
         }
         else {
@@ -231,11 +208,9 @@
         }
 
         if(document.getElementById("date").value == ""){
-            document.cookie = "state=block; SameSite=None; Secure";
-            document.cookie = "text=Fill in a valid date; SameSite=None; Secure";
             check3 = false
         }
-        else {
+        else { 
             check3 = true
         }
             
@@ -249,7 +224,5 @@
         var paragraph = document.getElementById("alertContent");
         paragraph.appendChild(text);
     }
-
-
 
 </script>
