@@ -6,6 +6,7 @@ using System.Data.Common;
 using Evv.Classes;
 using System.Security.Principal;
 using static System.Net.Mime.MediaTypeNames;
+using System.Xml.Linq;
 
 namespace Evv.Database
 {
@@ -152,7 +153,7 @@ namespace Evv.Database
         {
             List<Trip> ListWithTrips = new();
 
-            string Query = "SELECT * FROM Trip WHERE acountId = @userId and FavoriteName IS NULL";
+            string Query = "SELECT * FROM Trip WHERE acountId = @userId and FavoriteName IS NULL ORDER BY tripId DESC";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -289,6 +290,7 @@ namespace Evv.Database
                 {
                     while (reader.Read())
                     {
+
                         Favorites.Add(Convert.ToString(reader["FavoriteName"]));
                     }
                     conn.Close();
@@ -418,6 +420,31 @@ namespace Evv.Database
                 comm.Parameters.AddWithValue("@id", id);
                 comm.ExecuteNonQuery();
             }
+        }
+        public List<Trip> GetTripsByJourney(string name)
+        {
+            List<Trip> tripList = new List<Trip>();
+            string Query = "SELECT * FROM Trip WHERE FavoriteName = @FavoriteName";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                SqlCommand comm = new SqlCommand(Query, conn);
+                comm.Parameters.AddWithValue("@FavoriteName", name);
+
+                conn.Open();
+
+                using (SqlDataReader reader = comm.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Trip trip = new Trip((int)reader["tripId"], Convert.ToDouble(reader["Distance"]), reader["Transport"].ToString(), Convert.ToDateTime(reader["Date"]), Convert.ToDouble(reader["Score"]));
+                        tripList.Add(trip);
+                    }
+
+                    conn.Close();
+                }
+            }
+            return tripList;
         }
     }
 }
