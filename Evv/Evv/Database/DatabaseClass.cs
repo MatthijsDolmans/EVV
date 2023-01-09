@@ -12,7 +12,7 @@ namespace Evv.Database
 {
     public class DatabaseClass
     {
-        private string ConnectionString = "Data Source=cgievv.database.windows.net;Initial Catalog=FHICT-EVV;Persist Security Info=True;User ID=login;Password=CGIevv123";
+        private string ConnectionString = "Data Source=mssqlstud.fhict.local;Initial Catalog=dbi494690_evv;Persist Security Info=True;User ID=dbi494690_evv;Password=CGIevv123";
 
         private double totalscores;
         public void AddTrip(double score, double lenght, DateTime dag, string accountId, string transport)
