@@ -16,6 +16,7 @@ namespace Evv.Controllers
         private readonly ILogger<HomeController> _logger;
 
         private static List<Trip> Trips;
+        private static string view;
         public static int Counter = 0;
         public HomeController(ILogger<HomeController> logger)
         {
@@ -23,24 +24,11 @@ namespace Evv.Controllers
         }
         public IActionResult Journey(TripViewModel viewmodel)
         {
-            //int count = 0;
-            //Counter++;
-            //if(Counter == 2)
-            //{
-   
-            //    foreach(var item in Trips)
-            //    {
-            //        count++;
-            //        if(item.Id == viewmodel.TripId)
-            //        {
-            //            Trips.RemoveAt(count);
-            //        }
-            //    }
-            //    Counter = 0;
-            //}
+       
             DatabaseClass db = new DatabaseClass();
             if (viewmodel.view != null)
             {
+                view = viewmodel.view;
                 Trips = db.GetTripsByJourney(viewmodel.view);
             }
             return RedirectToAction("Index", "Home");
@@ -50,6 +38,7 @@ namespace Evv.Controllers
         public IActionResult Index(TripViewModel viewModel, string? submit, string? favorite,string? submit2)
         {
             viewModel.tripsbyjourney = Trips;
+            viewModel.view = view;
             bool HasData = true;
 
             if (User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier) != null)

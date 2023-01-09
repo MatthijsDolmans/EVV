@@ -117,22 +117,25 @@
                                 @foreach (var Name in Model.FavoriteNames)
                                 {
                                      <tr>
-                                          <td>@Name</td>
+                                            <td> <strong>@Name</strong></td>
                                           <td><button class="btnadd" name="submit2" value="@Name">Travel trip</button></td>
                                             <td><button asp-for="view" asp-controller="Home" asp-action="Journey" class="btnview" name="view" value="@Name">View trips</button></td>
                                             </tr>
-                                          @if(Model.tripsbyjourney != null)
+                                          @if(Model.tripsbyjourney != null && Model.view == Name)
                                           {
-
+                                            <tr>
+                                                
+                                                 <td>Distance</td>
+                                                 <td> People</td>
+                                                 <td> Vehicle</td>
+                                            </tr>
                                               @foreach(var item in Model.tripsbyjourney)
                                               {
-                                                  <tr> 
-                                                      <th> score</th>
-                                                      <th>Distance</th>
-                                                  </tr>
+
                                                   <tr>
-                                                    <td> @item.Score</td>
                                                     <td> @item.Distance</td>
+                                                    <td> @item.People</td>
+                                                    <td> @item.Vehicle</td>
                                                   </tr>
                                                  
                                               }
