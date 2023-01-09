@@ -4,6 +4,7 @@ using Evv.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
 using System.Net.Mail;
 using System.Security.Claims;
 using static System.Formats.Asn1.AsnWriter;
@@ -14,15 +15,33 @@ namespace Evv.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        private static List<Trip> Trips;
+        private static string view;
+        public static int Counter = 0;
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+        }
+        public IActionResult Journey(TripViewModel viewmodel)
+        {
+       
+            DatabaseClass db = new DatabaseClass();
+            if (viewmodel.view != null)
+            {
+                view = viewmodel.view;
+                Trips = db.GetTripsByJourney(viewmodel.view);
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         [Authorize]
         public IActionResult Index(TripViewModel viewModel, string? submit, string? favorite,string? submit2)
         {
-            if(viewModel.Vehicle_Modifier == Vehicle_Modifier.Walk_Bike || viewModel.Vehicle_Modifier == Vehicle_Modifier.Public_transport || viewModel.Vehicle_Modifier == Vehicle_Modifier.Airplane)
+            viewModel.tripsbyjourney = Trips;
+            viewModel.view = view;
+            bool HasData = true;
+
+            if (viewModel.Vehicle_Modifier == Vehicle_Modifier.Walk_Bike || viewModel.Vehicle_Modifier == Vehicle_Modifier.Public_transport || viewModel.Vehicle_Modifier == Vehicle_Modifier.Airplane)
             {
                 if (ModelState["People"] != null) ModelState["People"].Errors.Clear();
             }
@@ -43,13 +62,46 @@ namespace Evv.Controllers
             {
                 HasData = HasAllUserData();
             }
-
+        
             ViewBag.page = "Home";
             DatabaseClass db = new DatabaseClass();
+  
             if (favorite != null)
             {
-                SetUser();
-                db.AddFavorite(HttpContext.Session.GetString("UserId"), viewModel.FavoriteName);
+                if(viewModel.FavoriteName != null)
+                {
+                    bool test = false;
+                    var a = db.GetFavoriteName(HttpContext.Session.GetString("UserId"));
+                    if (a == null)
+                    {
+                        db.AddFavorite(HttpContext.Session.GetString("UserId"), viewModel.FavoriteName);
+                    }
+                    else
+                    {
+                        foreach (var item in a)
+                        {
+                            if (viewModel.FavoriteName == item)
+                            {
+                                test = true;
+                                break;
+                            }
+                            else
+                            {
+                                //exception moet nog
+                            }
+                        }
+                        if (test == false)
+                        {
+                            db.AddFavorite(HttpContext.Session.GetString("UserId"), viewModel.FavoriteName);
+                        }
+                    }
+                }
+                else
+                {
+                    //exception needed
+                }
+             
+                SetUser();          
             }
             else
             {

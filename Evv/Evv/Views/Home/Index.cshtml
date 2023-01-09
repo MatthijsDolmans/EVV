@@ -60,7 +60,7 @@
                 </div>
                 <div class="col-lg-5" style="padding: 12px;margin-left: auto; margin-right:auto;">
                     <div class="form-group" id="Favrotit">
-                        <label class="control-label">List of Favorites</label>
+                        <label class="control-label">List of Favorite journeys</label>
                         <select asp-for="ChosenfavoriteName" class="form-control">
                             @if(Model.FavoriteNames != null){
                                 @foreach (var item in Model.FavoriteNames)
@@ -94,7 +94,7 @@
                         <div class="form-group">
                             <label asp-for="FavoriteName" class="control-label">Favorite name</label>
                             <input asp-for="FavoriteName" class="form-control" lang="en" type="text" id="Favorite" /><br />
-                            <input class="form-control btn btn-primary" id="BtnAddTrip" type="submit" value="Add favorite" style="margin-left: auto; margin-right:auto;" name="favorite" />
+                            <input class="form-control btn btn-primary" id="BtnAddTrip" type="submit" value="Add new favorite journey " style="margin-left: auto; margin-right:auto;" name="favorite" />
                         </div>
                         <div class="form-group">
                         </div>
@@ -109,26 +109,44 @@
                                     </tr>
                                </thead>
                                 <tbody>
-                                    @if (Model.FavoriteNames != null)
-                                    {
-                                        @foreach (var Name in Model.FavoriteNames)
-                                        {
-                                            <tr>
-                                                <td>@Name</td>
-                                                <td><button class="btnadd" name="submit2" value="@Name">Travel trip</button></td>
+                                @foreach (var Name in Model.FavoriteNames)
+                                {
+                                     <tr>
+                                            <td> <strong>@Name</strong></td>
+                                          <td><button class="btnadd" name="submit2" value="@Name">Travel trip</button></td>
+                                            <td><button asp-for="view" asp-controller="Home" asp-action="Journey" class="btnview" name="view" value="@Name">View trips</button></td>
                                             </tr>
-                                        }
-                                    }
-                                </tbody> 
-                                <tfoot>
-                                <tr>
-                                    <th> Favorite trips name</th>
-                                    <th></th>
-                                </tr>
-                            </tfoot>
-                         </table>
-                    </center>
-                </div>
+                                          @if(Model.tripsbyjourney != null && Model.view == Name)
+                                          {
+                                            <tr>
+                                                
+                                                 <td>Distance</td>
+                                                 <td> People</td>
+                                                 <td> Vehicle</td>
+                                            </tr>
+                                              @foreach(var item in Model.tripsbyjourney)
+                                              {
+
+                                                  <tr>
+                                                    <td> @item.Distance</td>
+                                                    <td> @item.People</td>
+                                                    <td> @item.Vehicle</td>
+                                                  </tr>
+                                                 
+                                              }
+                                          }
+
+                                }
+          </tbody> 
+            <tfoot>
+                <tr>
+                    <th> Favorite trips name</th>
+                    <th></th>
+                </tr>
+            </tfoot>
+            </table>
+            </center>
+        </div>
             </form>
         </div>
     </div>
