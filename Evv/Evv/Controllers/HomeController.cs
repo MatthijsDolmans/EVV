@@ -29,7 +29,7 @@ namespace Evv.Controllers
             if (viewmodel.view != null)
             {
                 view = viewmodel.view;
-                Trips = db.GetTripsByJourney(viewmodel.view);
+                Trips = db.GetTripsByJourney(viewmodel.view, (HttpContext.Session.GetString("UserId")));
             }
             return RedirectToAction("Index", "Home");
         }

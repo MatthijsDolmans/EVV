@@ -421,15 +421,16 @@ namespace Evv.Database
                 comm.ExecuteNonQuery();
             }
         }
-        public List<Trip> GetTripsByJourney(string name)
+        public List<Trip> GetTripsByJourney(string name, string id)
         {
             List<Trip> tripList = new List<Trip>();
-            string Query = "SELECT * FROM Trip WHERE FavoriteName = @FavoriteName";
+            string Query = "SELECT * FROM Trip WHERE FavoriteName = @FavoriteName AND acountId = @id";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 SqlCommand comm = new SqlCommand(Query, conn);
                 comm.Parameters.AddWithValue("@FavoriteName", name);
+                comm.Parameters.AddWithValue("@id", id);
 
                 conn.Open();
 
