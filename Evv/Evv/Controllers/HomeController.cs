@@ -41,6 +41,17 @@ namespace Evv.Controllers
             viewModel.view = view;
             bool HasData = true;
 
+
+            if (viewModel.Vehicle_Modifier == Vehicle_Modifier.Walk_Bike || viewModel.Vehicle_Modifier == Vehicle_Modifier.Public_transport || viewModel.Vehicle_Modifier == Vehicle_Modifier.Airplane)
+            {
+                if (ModelState["People"] != null) ModelState["People"].Errors.Clear();
+            }
+
+            if (!ModelState.IsValid)
+            { 
+                return View(viewModel);
+            }
+
             if (User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier) != null)
             {
                 SetSession();

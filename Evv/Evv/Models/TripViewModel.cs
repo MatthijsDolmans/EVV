@@ -1,16 +1,21 @@
 ﻿using Evv.Classes;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Evv.Helpers;
+using System.ComponentModel.DataAnnotations;
 
 namespace Evv.Models;
 
 public class TripViewModel
 {
     public int TripId { get; set; }
+    [Range(0, int.MaxValue, ErrorMessage = "Please enter more then 0 KM")]
     public double Distance { get; set; }
+    [Range(0, int.MaxValue, ErrorMessage = "Please enter 1 person or more.")]
     public int People { get; set; }
     public double score { get; set; }
     public string? displaystate { get; set; }
+    [DataType(DataType.Date, ErrorMessage = "Date is required")]
+    [DisplayFormat(ApplyFormatInEditMode = true)]
     public DateTime DateCreated { get; set; }
     public Vehicle_Modifier Vehicle_Modifier { get; set; }
     public List<string>? FavoriteNames { get; set; }
