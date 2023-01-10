@@ -58,23 +58,12 @@
 
 
     <div class="container-fluid">
-        <h3 class="text-dark mb-4">Overview</h3>
         <div class="card shadow">
-            <div class="card-header py-3">
+            <div class="card-header py-3" style="display: flex">
                 <p class="text-primary m-0 fw-bold">Overview of all made trips</p>
+                <p style="margin-left:auto; margin-right:0"><strong>Your penalty points: @Model.totalscore</strong></p>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6 text-nowrap">
-
-                        </div>
-                    <div class="col-md-6">
-                        <div style="opacity: 0;" class="text-md-end dataTables_filter" id="dataTable_filter"><label class="form-label"><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
-                    </div>
-                </div>
-                <div class="col-md-6 text-nowrap"> 
-                    <h4>Total amount of penalty points: @Model.totalscore</h4>
-                </div>
                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                     <center>
                     <table class="table my-0" id="dataTable">
