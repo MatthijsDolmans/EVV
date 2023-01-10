@@ -68,7 +68,7 @@ namespace Evv.Classes
             int people = 1; 
             foreach (Vehicle_Modifier item in Enum.GetValues(typeof(Vehicle_Modifier))) 
             {
-                if (item == Vehicle_Modifier.Walk_Bike) 
+                if (vehicleType == Vehicle_Modifier.Walk_Bike.ToString()) 
                 {
                     //walk bike deleten 
                     people = 1;

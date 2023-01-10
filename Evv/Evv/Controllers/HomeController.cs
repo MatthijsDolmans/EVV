@@ -32,7 +32,7 @@ namespace Evv.Controllers
                 Trips = db.GetTripsByJourney(viewmodel.view, (HttpContext.Session.GetString("UserId")));
             }
             return RedirectToAction("Index", "Home");
-        }
+        }   
 
         [Authorize]
         public IActionResult Index(TripViewModel viewModel, string? submit, string? favorite,string? submit2)
